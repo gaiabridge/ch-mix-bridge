@@ -8,6 +8,6 @@ export default class Swaper extends DomNode {
     private loadHistoryNonce;
     private loadHistory;
     sendOverHorizon(amount: BigNumberish): Promise<void>;
-    receiveOverHorizon(sender: string, sendId: BigNumberish, amount: BigNumberish): Promise<void>;
+    receiveOverHorizon(_receiver: string, toChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish): Promise<void>;
 }
 //# sourceMappingURL=Swaper.d.ts.map

@@ -4,6 +4,7 @@ import MixSenderInterface from "./MixSenderInterface";
 declare class MixSenderContract extends KlaytnContract implements MixSenderInterface {
     constructor();
     private watch;
+    private getSendOverHorizonEvents;
     private getReceiveOverHorizonEvents;
     loadAddress(): Promise<string | undefined>;
     connect(): Promise<void>;

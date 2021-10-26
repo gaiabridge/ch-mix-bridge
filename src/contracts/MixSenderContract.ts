@@ -20,14 +20,26 @@ class MixSenderContract extends KlaytnContract implements MixSenderInterface {
             const currentBlock = await Klaytn.loadBlockNumber();
             const transferEvents = await MixContract.getTransferEvents(prevBlock, currentBlock);
             for (const event of transferEvents) {
-                this.fireEvent("Transfer", ...event.returnValues);
+                this.fireEvent("Transfer", event.returnValues[0], event.returnValues[1], event.returnValues[2]);
             }
-            const rceiveOverHorizonEvents = await this.getReceiveOverHorizonEvents(prevBlock, currentBlock);
-            for (const event of rceiveOverHorizonEvents) {
-                this.fireEvent("ReceiveOverHorizon", ...event.returnValues);
+            const sendOverHorizonEvents = await this.getSendOverHorizonEvents(prevBlock, currentBlock);
+            for (const event of sendOverHorizonEvents) {
+                this.fireEvent("SendOverHorizon", event.returnValues[0], event.returnValues[1], event.returnValues[2], event.returnValues[3]);
+            }
+            const receiveOverHorizonEvents = await this.getReceiveOverHorizonEvents(prevBlock, currentBlock);
+            for (const event of receiveOverHorizonEvents) {
+                this.fireEvent("ReceiveOverHorizon", event.returnValues[0], event.returnValues[1], event.returnValues[2], event.returnValues[3], event.returnValues[4]);
             }
             prevBlock = currentBlock + 1;
         }, 2000);
+    }
+
+    private async getSendOverHorizonEvents(startBlock: number, endBlock: number) {
+        const events = await this.contract.getPastEvents("SendOverHorizon", {
+            fromBlock: startBlock,
+            toBlock: endBlock,
+        });
+        return events;
     }
 
     private async getReceiveOverHorizonEvents(startBlock: number, endBlock: number) {

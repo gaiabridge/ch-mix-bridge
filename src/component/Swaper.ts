@@ -75,7 +75,7 @@ export default class Swaper extends DomNode {
                                 async () => {
                                     if (this.fromForm.sender !== undefined) {
                                         const sended = await this.fromForm.sender.sended(sender, this.toForm.chainId, receiver, sendId);
-                                        this.receiveOverHorizon(sender, sendId, sended);
+                                        this.receiveOverHorizon(receiver, this.toForm.chainId, sender, sendId, sended);
                                     }
                                 },
                             ),
@@ -95,10 +95,10 @@ export default class Swaper extends DomNode {
         }
     }
 
-    public async receiveOverHorizon(sender: string, sendId: BigNumberish, amount: BigNumberish) {
-        if (this.fromForm.sender !== undefined && this.toForm.sender !== undefined) {
+    public async receiveOverHorizon(_receiver: string, toChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish) {
+        if (this.fromForm.sender !== undefined && this.toForm.sender !== undefined && this.toForm.chainId.toString() === toChain.toString()) {
             const receiver = await this.toForm.sender.loadAddress();
-            if (receiver !== undefined) {
+            if (receiver === _receiver) {
                 const result = await superagent.get(`https://api.chainhorizon.org/mix/signsend?receiver=${receiver}&fromChain=${this.fromForm.chainId}&toChain=${this.toForm.chainId}&sender=${sender}&sendId=${sendId}&amount=${amount.toString()}`).send();
                 await this.toForm.sender.receiveOverHorizon(this.fromForm.chainId, this.toForm.chainId, sender, sendId, amount, result.text);
             }

@@ -1,5 +1,5 @@
 import { DomNode, el } from "@hanul/skynode";
-import { utils } from "ethers";
+import { BigNumber, utils } from "ethers";
 import MixSenderContract from "../contracts/MixSenderContract";
 import MixSenderInterface from "../contracts/MixSenderInterface";
 import PolygonMixContract from "../contracts/PolygonMixContract";
@@ -15,7 +15,7 @@ export default class Form extends DomNode {
     private buttonContainer: DomNode;
 
     constructor(
-        private formContainer: Swaper,
+        private swaper: Swaper,
         public chainId: number,
         private isFrom: boolean = false,
     ) {
@@ -45,13 +45,19 @@ export default class Form extends DomNode {
         this.chainSelect.domElement.value = String(chainId);
 
         this.sender?.off("connect", this.connectHandler);
+        this.sender?.off("Transfer", this.transferHandler);
+        this.sender?.off("SendOverHorizon", this.sendOverHorizonHandler);
 
         if (chainId === 8217) {
             this.sender = MixSenderContract;
         } else if (chainId === 137) {
             this.sender = PolygonMixContract;
         }
-        this.loadBalance();
+        await this.loadBalance();
+
+        this.sender?.on("connect", this.connectHandler);
+        this.sender?.on("Transfer", this.transferHandler);
+        this.sender?.on("SendOverHorizon", this.sendOverHorizonHandler);
     }
 
     private async loadBalance() {
@@ -72,7 +78,7 @@ export default class Form extends DomNode {
 
                     this.buttonContainer.append(
                         el("a.send-button", "보내기", {
-                            click: () => this.formContainer.sendOverHorizon(utils.parseEther(input.domElement.value)),
+                            click: () => this.swaper.sendOverHorizon(utils.parseEther(input.domElement.value)),
                         }),
                     );
                 }
@@ -84,13 +90,29 @@ export default class Form extends DomNode {
                     }),
                 );
             }
-
-            this.sender.on("connect", this.connectHandler);
         }
     }
 
     private connectHandler = async () => {
         this.fireEvent("connect");
         this.loadBalance();
+    }
+
+    private transferHandler = async (from: string, to: string) => {
+        const owner = await this.sender?.loadAddress();
+        if (from === owner || to === owner) {
+            this.loadBalance();
+        }
+    }
+
+    private sendOverHorizonHandler = async (sender: string, toChain: BigNumber, receiver: string, sendId: BigNumber, amount: BigNumber) => {
+        this.swaper.receiveOverHorizon(receiver, toChain, sender, sendId, amount);
+    }
+
+    public delete() {
+        super.delete();
+        this.sender?.off("connect", this.connectHandler);
+        this.sender?.off("Transfer", this.transferHandler);
+        this.sender?.off("SendOverHorizon", this.sendOverHorizonHandler);
     }
 }
