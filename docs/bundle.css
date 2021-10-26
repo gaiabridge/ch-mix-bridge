@@ -165,17 +165,29 @@ input {
   clear: both;
   visibility: hidden;
 }
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("../fonts/IBMPlexSans-Regular.ttf") format("ttf");
+}
 body {
+  font-family: "IBM Plex Sans", sans-serif;
   background-color: #000000;
   color: #ffffff;
   padding: 20px;
   max-width: 690px;
   margin: auto;
 }
+body > h1 > .logo {
+  font-size: 62px;
+}
 body > h1 > .mix {
   margin-top: 4px;
   display: flex;
   align-items: center;
+  font-size: 25px;
+  background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 body > h1 > .mix > a {
   display: flex;
@@ -192,10 +204,10 @@ a {
 footer {
   margin-top: 20px;
 }
-.form-container {
+.swaper > .form-container {
   margin-top: 20px;
 }
-.form-container:after {
+.swaper > .form-container:after {
   content: " ";
   display: block;
   font-size: 0;
@@ -203,18 +215,18 @@ footer {
   clear: both;
   visibility: hidden;
 }
-.form-container > .arrow {
+.swaper > .form-container > .arrow {
   float: left;
   margin-top: 75px;
   margin-left: 20px;
   margin-right: 20px;
 }
 @media only screen and (max-width: 719px) {
-  .form-container > .arrow {
+  .swaper > .form-container > .arrow {
     display: none;
   }
 }
-.form-container > .mobile-arrow {
+.swaper > .form-container > .mobile-arrow {
   display: none;
   transform: rotate(90deg);
   margin: auto;
@@ -222,33 +234,68 @@ footer {
   margin-bottom: 20px;
 }
 @media only screen and (max-width: 719px) {
-  .form-container > .mobile-arrow {
+  .swaper > .form-container > .mobile-arrow {
     display: block;
   }
 }
-.form-container > .form {
+.swaper > .form-container > .form {
+  display: flex;
+  flex-direction: column;
   float: left;
   width: 280px;
   height: 200px;
-  background-color: #ffffff;
-  color: #000000;
-  border-radius: 20px;
+  background-color: #1f1f1f;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 16px;
+}
+.swaper > .form-container > .form > select {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  padding: 4px;
+  background-color: #121212;
+  color: #fff;
+  border-radius: 8px;
+}
+.swaper > .form-container > .form > .input-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+.swaper > .form-container > .form > .input-container > input {
+  padding: 4px;
+  background-color: #121212;
+  color: #fff;
+  border-radius: 8px;
+}
+.swaper > .form-container > .form > .button-container > .connect-button,
+.swaper > .form-container > .form > .button-container > .send-button {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
 }
 @media only screen and (max-width: 719px) {
-  .form-container > .form {
+  .swaper > .form-container > .form {
     float: none;
     width: auto;
   }
 }
-.history {
+.swaper .history {
   margin-top: 20px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #1f1f1f;
+  color: #fff;
   overflow-y: scroll;
   padding: 10px;
   height: 160px;
+  border-radius: 8px;
 }
-.history > h2 {
+.swaper .history > h2 {
   font-weight: bold;
 }
 

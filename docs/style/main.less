@@ -1,6 +1,8 @@
 @import "base.less";
+@import "font.less";
 
 body {
+    font-family     : "IBM Plex Sans", sans-serif;
     background-color: #000000;
     color           : #ffffff;
     padding         : 20px;
@@ -8,10 +10,18 @@ body {
     margin          : auto;
 
     >h1 {
+        >.logo {
+            font-size: 62px;
+        }
+
         >.mix {
-            margin-top : 4px;
-            display    : flex;
-            align-items: center;
+            margin-top             : 4px;
+            display                : flex;
+            align-items            : center;
+            font-size              : 25px;
+            background             : linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
 
             >a {
                 display     : flex;
@@ -35,6 +45,4 @@ footer {
     margin-top: 20px;
 }
 
-@import "component/formcontainer.less";
-@import "component/history.less";
-@import "component/historyitem.less";
+@import "component/swaper.less";

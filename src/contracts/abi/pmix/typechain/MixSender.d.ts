@@ -22,8 +22,8 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface MixSenderInterface extends ethers.utils.Interface {
   functions: {
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)": FunctionFragment;
     "received(address,uint256,address,uint256)": FunctionFragment;
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)": FunctionFragment;
     "signer()": FunctionFragment;
     "sendCount(address,uint256,address)": FunctionFragment;
     "setSigner(address)": FunctionFragment;
@@ -37,12 +37,19 @@ interface MixSenderInterface extends ethers.utils.Interface {
   };
 
   encodeFunctionData(
-    functionFragment: "receiveOverHorizon",
-    values: [BigNumberish, string, BigNumberish, BigNumberish, BytesLike]
-  ): string;
-  encodeFunctionData(
     functionFragment: "received",
     values: [string, BigNumberish, string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "receiveOverHorizon",
+    values: [
+      BigNumberish,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike
+    ]
   ): string;
   encodeFunctionData(functionFragment: "signer", values?: undefined): string;
   encodeFunctionData(
@@ -70,11 +77,11 @@ interface MixSenderInterface extends ethers.utils.Interface {
     values: [string]
   ): string;
 
+  decodeFunctionResult(functionFragment: "received", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "receiveOverHorizon",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "received", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "signer", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sendCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setSigner", data: BytesLike): Result;
@@ -122,24 +129,6 @@ export class MixSender extends Contract {
   interface: MixSenderInterface;
 
   functions: {
-    receiveOverHorizon(
-      fromChain: BigNumberish,
-      sender: string,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
-      fromChain: BigNumberish,
-      sender: string,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
     received(
       arg0: string,
       arg1: BigNumberish,
@@ -155,6 +144,26 @@ export class MixSender extends Contract {
       arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
+
+    receiveOverHorizon(
+      fromChain: BigNumberish,
+      toChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
+      amount: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
+      fromChain: BigNumberish,
+      toChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
+      amount: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     signer(overrides?: CallOverrides): Promise<[string]>;
 
@@ -241,24 +250,6 @@ export class MixSender extends Contract {
     ): Promise<ContractTransaction>;
   };
 
-  receiveOverHorizon(
-    fromChain: BigNumberish,
-    sender: string,
-    sendId: BigNumberish,
-    amount: BigNumberish,
-    signature: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
-    fromChain: BigNumberish,
-    sender: string,
-    sendId: BigNumberish,
-    amount: BigNumberish,
-    signature: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
   received(
     arg0: string,
     arg1: BigNumberish,
@@ -274,6 +265,26 @@ export class MixSender extends Contract {
     arg3: BigNumberish,
     overrides?: CallOverrides
   ): Promise<boolean>;
+
+  receiveOverHorizon(
+    fromChain: BigNumberish,
+    toChain: BigNumberish,
+    sender: string,
+    sendId: BigNumberish,
+    amount: BigNumberish,
+    signature: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
+    fromChain: BigNumberish,
+    toChain: BigNumberish,
+    sender: string,
+    sendId: BigNumberish,
+    amount: BigNumberish,
+    signature: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   sendCount(
     sender: string,
@@ -356,24 +367,6 @@ export class MixSender extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    receiveOverHorizon(
-      fromChain: BigNumberish,
-      sender: string,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
-      fromChain: BigNumberish,
-      sender: string,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     received(
       arg0: string,
       arg1: BigNumberish,
@@ -389,6 +382,26 @@ export class MixSender extends Contract {
       arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    receiveOverHorizon(
+      fromChain: BigNumberish,
+      toChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
+      amount: BigNumberish,
+      signature: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
+      fromChain: BigNumberish,
+      toChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
+      amount: BigNumberish,
+      signature: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     signer(overrides?: CallOverrides): Promise<string>;
 
@@ -496,24 +509,6 @@ export class MixSender extends Contract {
   };
 
   estimateGas: {
-    receiveOverHorizon(
-      fromChain: BigNumberish,
-      sender: string,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
-      fromChain: BigNumberish,
-      sender: string,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
     received(
       arg0: string,
       arg1: BigNumberish,
@@ -528,6 +523,26 @@ export class MixSender extends Contract {
       arg2: string,
       arg3: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    receiveOverHorizon(
+      fromChain: BigNumberish,
+      toChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
+      amount: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
+      fromChain: BigNumberish,
+      toChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
+      amount: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
     ): Promise<BigNumber>;
 
     signer(overrides?: CallOverrides): Promise<BigNumber>;
@@ -613,24 +628,6 @@ export class MixSender extends Contract {
   };
 
   populateTransaction: {
-    receiveOverHorizon(
-      fromChain: BigNumberish,
-      sender: string,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
-      fromChain: BigNumberish,
-      sender: string,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
     received(
       arg0: string,
       arg1: BigNumberish,
@@ -645,6 +642,26 @@ export class MixSender extends Contract {
       arg2: string,
       arg3: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    receiveOverHorizon(
+      fromChain: BigNumberish,
+      toChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
+      amount: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
+      fromChain: BigNumberish,
+      toChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
+      amount: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     signer(overrides?: CallOverrides): Promise<PopulatedTransaction>;

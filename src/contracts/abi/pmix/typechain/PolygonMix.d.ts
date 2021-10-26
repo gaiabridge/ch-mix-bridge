@@ -34,7 +34,7 @@ interface PolygonMixInterface extends ethers.utils.Interface {
     "nonces(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)": FunctionFragment;
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)": FunctionFragment;
     "received(address,uint256,address,uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "sendCount(address,uint256,address)": FunctionFragment;
@@ -93,7 +93,14 @@ interface PolygonMixInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "receiveOverHorizon",
-    values: [BigNumberish, string, BigNumberish, BigNumberish, BytesLike]
+    values: [
+      BigNumberish,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "received",
@@ -330,6 +337,7 @@ export class PolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -337,8 +345,9 @@ export class PolygonMix extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -579,6 +588,7 @@ export class PolygonMix extends Contract {
 
   receiveOverHorizon(
     fromChain: BigNumberish,
+    toChain: BigNumberish,
     sender: string,
     sendId: BigNumberish,
     amount: BigNumberish,
@@ -586,8 +596,9 @@ export class PolygonMix extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+  "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
     fromChain: BigNumberish,
+    toChain: BigNumberish,
     sender: string,
     sendId: BigNumberish,
     amount: BigNumberish,
@@ -824,6 +835,7 @@ export class PolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -831,8 +843,9 @@ export class PolygonMix extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -1102,6 +1115,7 @@ export class PolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -1109,8 +1123,9 @@ export class PolygonMix extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -1359,6 +1374,7 @@ export class PolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -1366,8 +1382,9 @@ export class PolygonMix extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,

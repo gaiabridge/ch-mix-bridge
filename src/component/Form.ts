@@ -3,7 +3,7 @@ import { utils } from "ethers";
 import MixSenderContract from "../contracts/MixSenderContract";
 import MixSenderInterface from "../contracts/MixSenderInterface";
 import PolygonMixContract from "../contracts/PolygonMixContract";
-import FormContainer from "./FormContainer";
+import Swaper from "./Swaper";
 
 export default class Form extends DomNode {
 
@@ -15,7 +15,7 @@ export default class Form extends DomNode {
     private buttonContainer: DomNode;
 
     constructor(
-        private formContainer: FormContainer,
+        private formContainer: Swaper,
         public chainId: number,
         private isFrom: boolean = false,
     ) {
@@ -44,7 +44,7 @@ export default class Form extends DomNode {
         this.chainId = chainId;
         this.chainSelect.domElement.value = String(chainId);
 
-        this.sender?.off("connect", this.loadBalance);
+        this.sender?.off("connect", this.connectHandler);
 
         if (chainId === 8217) {
             this.sender = MixSenderContract;
@@ -54,7 +54,7 @@ export default class Form extends DomNode {
         this.loadBalance();
     }
 
-    private loadBalance = async () => {
+    private async loadBalance() {
 
         this.inputContainer.empty();
         this.buttonContainer.empty();
@@ -85,7 +85,12 @@ export default class Form extends DomNode {
                 );
             }
 
-            this.sender.on("connect", this.loadBalance);
+            this.sender.on("connect", this.connectHandler);
         }
+    }
+
+    private connectHandler = async () => {
+        this.fireEvent("connect");
+        this.loadBalance();
     }
 }

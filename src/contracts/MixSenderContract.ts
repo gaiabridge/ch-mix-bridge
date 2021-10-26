@@ -8,7 +8,7 @@ import MixSenderInterface from "./MixSenderInterface";
 class MixSenderContract extends KlaytnContract implements MixSenderInterface {
 
     constructor() {
-        super("0x777b72f14c2227431BBAC0e795511B440CdA0e8A", MixSenderArtifact.abi);
+        super("0xfD6F034B54CF2bcA1eDbA063F5f9Dc5979a72604", MixSenderArtifact.abi);
         KlaytnWallet.toss("connect", this);
     }
 
@@ -49,8 +49,8 @@ class MixSenderContract extends KlaytnContract implements MixSenderInterface {
         return BigNumber.from(await this.runMethod("sendCount", sender, toChain, receiver));
     }
 
-    public async receiveOverHorizon(fromChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish, signature: string) {
-        await this.runWalletMethod("receiveOverHorizon", fromChain, sender, sendId, amount, signature);
+    public async receiveOverHorizon(fromChain: BigNumberish, toChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish, signature: string) {
+        await this.runWalletMethod("receiveOverHorizon", fromChain, toChain, sender, sendId, amount, signature);
     }
 
     public async received(receiver: string, fromChain: BigNumberish, sender: string, sendId: BigNumberish): Promise<boolean> {

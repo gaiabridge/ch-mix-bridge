@@ -18,36 +18,6 @@ export class IMixSender__factory {
 
 const _abi = [
   {
-    constant: false,
-    inputs: [
-      {
-        name: "fromChain",
-        type: "uint256",
-      },
-      {
-        name: "sender",
-        type: "address",
-      },
-      {
-        name: "sendId",
-        type: "uint256",
-      },
-      {
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        name: "signature",
-        type: "bytes",
-      },
-    ],
-    name: "receiveOverHorizon",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     constant: true,
     inputs: [
       {
@@ -76,6 +46,40 @@ const _abi = [
     ],
     payable: false,
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "fromChain",
+        type: "uint256",
+      },
+      {
+        name: "toChain",
+        type: "uint256",
+      },
+      {
+        name: "sender",
+        type: "address",
+      },
+      {
+        name: "sendId",
+        type: "uint256",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        name: "signature",
+        type: "bytes",
+      },
+    ],
+    name: "receiveOverHorizon",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

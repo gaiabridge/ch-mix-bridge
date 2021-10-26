@@ -29,7 +29,7 @@ interface IPolygonMixInterface extends ethers.utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)": FunctionFragment;
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)": FunctionFragment;
     "received(address,uint256,address,uint256)": FunctionFragment;
     "sendCount(address,uint256,address)": FunctionFragment;
     "sendOverHorizon(uint256,address,uint256)": FunctionFragment;
@@ -73,7 +73,14 @@ interface IPolygonMixInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "receiveOverHorizon",
-    values: [BigNumberish, string, BigNumberish, BigNumberish, BytesLike]
+    values: [
+      BigNumberish,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "received",
@@ -241,6 +248,7 @@ export class IPolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -248,8 +256,9 @@ export class IPolygonMix extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -426,6 +435,7 @@ export class IPolygonMix extends Contract {
 
   receiveOverHorizon(
     fromChain: BigNumberish,
+    toChain: BigNumberish,
     sender: string,
     sendId: BigNumberish,
     amount: BigNumberish,
@@ -433,8 +443,9 @@ export class IPolygonMix extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+  "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
     fromChain: BigNumberish,
+    toChain: BigNumberish,
     sender: string,
     sendId: BigNumberish,
     amount: BigNumberish,
@@ -607,6 +618,7 @@ export class IPolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -614,8 +626,9 @@ export class IPolygonMix extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -819,6 +832,7 @@ export class IPolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -826,8 +840,9 @@ export class IPolygonMix extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -1015,6 +1030,7 @@ export class IPolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
@@ -1022,8 +1038,9 @@ export class IPolygonMix extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      toChain: BigNumberish,
       sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,

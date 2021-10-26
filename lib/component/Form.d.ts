@@ -1,6 +1,6 @@
 import { DomNode } from "@hanul/skynode";
 import MixSenderInterface from "../contracts/MixSenderInterface";
-import FormContainer from "./FormContainer";
+import Swaper from "./Swaper";
 export default class Form extends DomNode {
     private formContainer;
     chainId: number;
@@ -10,8 +10,9 @@ export default class Form extends DomNode {
     private balanceDisplay;
     private inputContainer;
     private buttonContainer;
-    constructor(formContainer: FormContainer, chainId: number, isFrom?: boolean);
+    constructor(formContainer: Swaper, chainId: number, isFrom?: boolean);
     changeChain(chainId: number): Promise<void>;
     private loadBalance;
+    private connectHandler;
 }
 //# sourceMappingURL=Form.d.ts.map

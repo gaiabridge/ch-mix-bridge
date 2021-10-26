@@ -8,7 +8,7 @@ import ERC20Contract from "./polygon-standard/ERC20Contract";
 class PolygonMixContract extends ERC20Contract<PolygonMix> implements MixSenderInterface {
 
     constructor() {
-        super("0xc03814F937f790422b79ccc669d398C5167AE853", PolygonMixArtifact.abi, []);
+        super("0x7dB57d19a9C7Be33896C74301949fE1B2F9c1480", PolygonMixArtifact.abi, []);
         PolygonWallet.toss("connect", this);
     }
 
@@ -33,9 +33,9 @@ class PolygonMixContract extends ERC20Contract<PolygonMix> implements MixSenderI
         return await this.contract.sendCount(sender, toChain, receiver);
     }
 
-    public async receiveOverHorizon(fromChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish, signature: string) {
+    public async receiveOverHorizon(fromChain: BigNumberish, toChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish, signature: string) {
         const contract = await this.connectAndGetWalletContract();
-        await contract?.receiveOverHorizon(fromChain, sender, sendId, amount, signature);
+        await contract?.receiveOverHorizon(fromChain, toChain, sender, sendId, amount, signature);
     }
 
     public async received(receiver: string, fromChain: BigNumberish, sender: string, sendId: BigNumberish): Promise<boolean> {
