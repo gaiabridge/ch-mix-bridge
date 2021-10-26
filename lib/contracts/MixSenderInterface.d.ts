@@ -1,8 +1,7 @@
 import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
-import KlaytnContract from "./KlaytnContract";
-import MixSenderInterface from "./MixSenderInterface";
-declare class MixSenderContract extends KlaytnContract implements MixSenderInterface {
-    constructor();
+export default interface MixSenderInterface {
+    on(eventName: string, eventHandler: any): void;
+    off(eventName: string, eventHandler: any): void;
     loadAddress(): Promise<string | undefined>;
     connect(): Promise<void>;
     balanceOf(owner: string): Promise<BigNumber>;
@@ -12,6 +11,4 @@ declare class MixSenderContract extends KlaytnContract implements MixSenderInter
     receiveOverHorizon(fromChain: BigNumberish, sendId: BigNumberish, amount: BigNumberish, signature: string): Promise<void>;
     received(receiver: string, amount: BigNumberish, sendId: BigNumberish): Promise<boolean>;
 }
-declare const _default: MixSenderContract;
-export default _default;
-//# sourceMappingURL=MixSenderContract.d.ts.map
+//# sourceMappingURL=MixSenderInterface.d.ts.map

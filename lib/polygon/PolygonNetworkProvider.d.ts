@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import EventContainer from "eventcontainer";
 declare class PolygonNetworkProvider extends EventContainer {
-    provider: ethers.providers.WebSocketProvider;
+    provider: ethers.providers.JsonRpcProvider;
     signer: ethers.providers.JsonRpcSigner;
     constructor();
     getBlockNumber(): Promise<number>;

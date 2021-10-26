@@ -3,12 +3,12 @@ import EventContainer from "eventcontainer";
 
 class PolygonNetworkProvider extends EventContainer {
 
-    public provider: ethers.providers.WebSocketProvider;
+    public provider: ethers.providers.JsonRpcProvider;
     public signer: ethers.providers.JsonRpcSigner;
 
     constructor() {
         super();
-        this.provider = new ethers.providers.WebSocketProvider("https://polygon-rpc.com/");
+        this.provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/");
         this.signer = this.provider.getSigner(ethers.constants.AddressZero);
     }
 

@@ -165,4 +165,90 @@ input {
   clear: both;
   visibility: hidden;
 }
+body {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 20px;
+  max-width: 690px;
+  margin: auto;
+}
+body > h1 > .mix {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+}
+body > h1 > .mix > a {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+}
+body > h1 > .mix > a > img {
+  margin-right: 4px;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+footer {
+  margin-top: 20px;
+}
+.form-container {
+  margin-top: 20px;
+}
+.form-container:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.form-container > .arrow {
+  float: left;
+  margin-top: 75px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+@media only screen and (max-width: 719px) {
+  .form-container > .arrow {
+    display: none;
+  }
+}
+.form-container > .mobile-arrow {
+  display: none;
+  transform: rotate(90deg);
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 719px) {
+  .form-container > .mobile-arrow {
+    display: block;
+  }
+}
+.form-container > .form {
+  float: left;
+  width: 280px;
+  height: 200px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 20px;
+}
+@media only screen and (max-width: 719px) {
+  .form-container > .form {
+    float: none;
+    width: auto;
+  }
+}
+.history {
+  margin-top: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  overflow-y: scroll;
+  padding: 10px;
+  height: 160px;
+}
+.history > h2 {
+  font-weight: bold;
+}
 

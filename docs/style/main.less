@@ -1,1 +1,40 @@
 @import "base.less";
+
+body {
+    background-color: #000000;
+    color           : #ffffff;
+    padding         : 20px;
+    max-width       : 690px;
+    margin          : auto;
+
+    >h1 {
+        >.mix {
+            margin-top : 4px;
+            display    : flex;
+            align-items: center;
+
+            >a {
+                display     : flex;
+                align-items : center;
+                margin-right: 4px;
+
+                >img {
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+}
+
+a {
+    color          : inherit;
+    text-decoration: inherit;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+@import "component/formcontainer.less";
+@import "component/history.less";
+@import "component/historyitem.less";
