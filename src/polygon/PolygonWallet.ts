@@ -22,7 +22,7 @@ class PolygonWallet extends EventContainer {
                 this.fireEvent("chainchange", BigNumber.from(chainId).toNumber());
             });
         } else {
-            this.walletConnectProvider = new WalletConnectProvider({ /*infuraId: Config.infuraId*/ });
+            this.walletConnectProvider = new WalletConnectProvider({ rpc: "https://polygon-rpc.com/" });
             this.provider = new ethers.providers.Web3Provider(this.walletConnectProvider);
             this.walletConnectProvider.on("chainChanged", (chainId: number) => {
                 this.fireEvent("chainchange", chainId);

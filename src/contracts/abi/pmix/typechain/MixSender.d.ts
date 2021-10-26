@@ -22,74 +22,74 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface MixSenderInterface extends ethers.utils.Interface {
   functions: {
-    "sendOverHorizon(uint256,uint256)": FunctionFragment;
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)": FunctionFragment;
+    "received(address,uint256,address,uint256)": FunctionFragment;
     "signer()": FunctionFragment;
-    "sended(address,uint256,uint256)": FunctionFragment;
+    "sendCount(address,uint256,address)": FunctionFragment;
     "setSigner(address)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "sendCount(address,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "isOwner()": FunctionFragment;
-    "received(address,uint256,uint256)": FunctionFragment;
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)": FunctionFragment;
+    "sended(address,uint256,address,uint256)": FunctionFragment;
     "mix()": FunctionFragment;
+    "sendOverHorizon(uint256,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "sendOverHorizon",
-    values: [BigNumberish, BigNumberish]
+    functionFragment: "receiveOverHorizon",
+    values: [BigNumberish, string, BigNumberish, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "received",
+    values: [string, BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "signer", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "sended",
-    values: [string, BigNumberish, BigNumberish]
+    functionFragment: "sendCount",
+    values: [string, BigNumberish, string]
   ): string;
   encodeFunctionData(functionFragment: "setSigner", values: [string]): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
-  encodeFunctionData(
-    functionFragment: "sendCount",
-    values: [string, BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "isOwner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "received",
-    values: [string, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "receiveOverHorizon",
-    values: [BigNumberish, BigNumberish, BigNumberish, BytesLike]
+    functionFragment: "sended",
+    values: [string, BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "mix", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "sendOverHorizon",
+    values: [BigNumberish, string, BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "sendOverHorizon",
+    functionFragment: "receiveOverHorizon",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "received", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "signer", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "sended", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sendCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setSigner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "sendCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isOwner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "received", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sended", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "mix", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "receiveOverHorizon",
+    functionFragment: "sendOverHorizon",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "mix", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -97,8 +97,8 @@ interface MixSenderInterface extends ethers.utils.Interface {
 
   events: {
     "SetSigner(address)": EventFragment;
-    "SendOverHorizon(address,uint256)": EventFragment;
-    "ReceiveOverHorizon(address,uint256)": EventFragment;
+    "SendOverHorizon(address,uint256,address,uint256)": EventFragment;
+    "ReceiveOverHorizon(address,uint256,address,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
@@ -122,33 +122,55 @@ export class MixSender extends Contract {
   interface: MixSenderInterface;
 
   functions: {
-    sendOverHorizon(
-      toChain: BigNumberish,
+    receiveOverHorizon(
+      fromChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
       amount: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "sendOverHorizon(uint256,uint256)"(
-      toChain: BigNumberish,
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+      fromChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
       amount: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
+
+    received(
+      arg0: string,
+      arg1: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "received(address,uint256,address,uint256)"(
+      arg0: string,
+      arg1: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     signer(overrides?: CallOverrides): Promise<[string]>;
 
     "signer()"(overrides?: CallOverrides): Promise<[string]>;
 
-    sended(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+    sendCount(
+      sender: string,
+      toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "sended(address,uint256,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+    "sendCount(address,uint256,address)"(
+      sender: string,
+      toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -166,18 +188,6 @@ export class MixSender extends Contract {
 
     "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
 
-    sendCount(
-      sender: string,
-      toChain: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "sendCount(address,uint256)"(
-      sender: string,
-      toChain: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -186,39 +196,39 @@ export class MixSender extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<[boolean]>;
 
-    received(
+    sended(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[BigNumber]>;
 
-    "received(address,uint256,uint256)"(
+    "sended(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    receiveOverHorizon(
-      fromChain: BigNumberish,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
-      fromChain: BigNumberish,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+    ): Promise<[BigNumber]>;
 
     mix(overrides?: CallOverrides): Promise<[string]>;
 
     "mix()"(overrides?: CallOverrides): Promise<[string]>;
+
+    sendOverHorizon(
+      toChain: BigNumberish,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "sendOverHorizon(uint256,address,uint256)"(
+      toChain: BigNumberish,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     transferOwnership(
       newOwner: string,
@@ -231,29 +241,51 @@ export class MixSender extends Contract {
     ): Promise<ContractTransaction>;
   };
 
-  sendOverHorizon(
-    toChain: BigNumberish,
+  receiveOverHorizon(
+    fromChain: BigNumberish,
+    sender: string,
+    sendId: BigNumberish,
     amount: BigNumberish,
+    signature: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "sendOverHorizon(uint256,uint256)"(
-    toChain: BigNumberish,
+  "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+    fromChain: BigNumberish,
+    sender: string,
+    sendId: BigNumberish,
     amount: BigNumberish,
+    signature: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  sended(
+  received(
     arg0: string,
     arg1: BigNumberish,
-    arg2: BigNumberish,
+    arg2: string,
+    arg3: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "received(address,uint256,address,uint256)"(
+    arg0: string,
+    arg1: BigNumberish,
+    arg2: string,
+    arg3: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  sendCount(
+    sender: string,
+    toChain: BigNumberish,
+    receiver: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "sended(address,uint256,uint256)"(
-    arg0: string,
-    arg1: BigNumberish,
-    arg2: BigNumberish,
+  "sendCount(address,uint256,address)"(
+    sender: string,
+    toChain: BigNumberish,
+    receiver: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -271,18 +303,6 @@ export class MixSender extends Contract {
 
   "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
 
-  sendCount(
-    sender: string,
-    toChain: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "sendCount(address,uint256)"(
-    sender: string,
-    toChain: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -291,39 +311,39 @@ export class MixSender extends Contract {
 
   "isOwner()"(overrides?: CallOverrides): Promise<boolean>;
 
-  received(
+  sended(
     arg0: string,
     arg1: BigNumberish,
-    arg2: BigNumberish,
+    arg2: string,
+    arg3: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<boolean>;
+  ): Promise<BigNumber>;
 
-  "received(address,uint256,uint256)"(
+  "sended(address,uint256,address,uint256)"(
     arg0: string,
     arg1: BigNumberish,
-    arg2: BigNumberish,
+    arg2: string,
+    arg3: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  receiveOverHorizon(
-    fromChain: BigNumberish,
-    sendId: BigNumberish,
-    amount: BigNumberish,
-    signature: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
-    fromChain: BigNumberish,
-    sendId: BigNumberish,
-    amount: BigNumberish,
-    signature: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+  ): Promise<BigNumber>;
 
   mix(overrides?: CallOverrides): Promise<string>;
 
   "mix()"(overrides?: CallOverrides): Promise<string>;
+
+  sendOverHorizon(
+    toChain: BigNumberish,
+    receiver: string,
+    amount: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "sendOverHorizon(uint256,address,uint256)"(
+    toChain: BigNumberish,
+    receiver: string,
+    amount: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   transferOwnership(
     newOwner: string,
@@ -336,33 +356,55 @@ export class MixSender extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    sendOverHorizon(
-      toChain: BigNumberish,
+    receiveOverHorizon(
+      fromChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
       amount: BigNumberish,
+      signature: BytesLike,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<void>;
 
-    "sendOverHorizon(uint256,uint256)"(
-      toChain: BigNumberish,
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+      fromChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
       amount: BigNumberish,
+      signature: BytesLike,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<void>;
+
+    received(
+      arg0: string,
+      arg1: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "received(address,uint256,address,uint256)"(
+      arg0: string,
+      arg1: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     signer(overrides?: CallOverrides): Promise<string>;
 
     "signer()"(overrides?: CallOverrides): Promise<string>;
 
-    sended(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+    sendCount(
+      sender: string,
+      toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sended(address,uint256,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+    "sendCount(address,uint256,address)"(
+      sender: string,
+      toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -377,18 +419,6 @@ export class MixSender extends Contract {
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
-    sendCount(
-      sender: string,
-      toChain: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "sendCount(address,uint256)"(
-      sender: string,
-      toChain: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -397,39 +427,39 @@ export class MixSender extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<boolean>;
 
-    received(
+    sended(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<BigNumber>;
 
-    "received(address,uint256,uint256)"(
+    "sended(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    receiveOverHorizon(
-      fromChain: BigNumberish,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
-      fromChain: BigNumberish,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber>;
 
     mix(overrides?: CallOverrides): Promise<string>;
 
     "mix()"(overrides?: CallOverrides): Promise<string>;
+
+    sendOverHorizon(
+      toChain: BigNumberish,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "sendOverHorizon(uint256,address,uint256)"(
+      toChain: BigNumberish,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -445,9 +475,19 @@ export class MixSender extends Contract {
   filters: {
     SetSigner(signer: string | null): EventFilter;
 
-    SendOverHorizon(sender: string | null, amount: null): EventFilter;
+    SendOverHorizon(
+      sender: string | null,
+      toChain: BigNumberish | null,
+      receiver: string | null,
+      amount: null
+    ): EventFilter;
 
-    ReceiveOverHorizon(receiver: string | null, amount: null): EventFilter;
+    ReceiveOverHorizon(
+      receiver: string | null,
+      fromChain: BigNumberish | null,
+      sender: string | null,
+      amount: null
+    ): EventFilter;
 
     OwnershipTransferred(
       previousOwner: string | null,
@@ -456,33 +496,55 @@ export class MixSender extends Contract {
   };
 
   estimateGas: {
-    sendOverHorizon(
-      toChain: BigNumberish,
+    receiveOverHorizon(
+      fromChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
       amount: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "sendOverHorizon(uint256,uint256)"(
-      toChain: BigNumberish,
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+      fromChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
       amount: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    received(
+      arg0: string,
+      arg1: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "received(address,uint256,address,uint256)"(
+      arg0: string,
+      arg1: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     signer(overrides?: CallOverrides): Promise<BigNumber>;
 
     "signer()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    sended(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+    sendCount(
+      sender: string,
+      toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sended(address,uint256,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+    "sendCount(address,uint256,address)"(
+      sender: string,
+      toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -497,18 +559,6 @@ export class MixSender extends Contract {
 
     "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
 
-    sendCount(
-      sender: string,
-      toChain: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "sendCount(address,uint256)"(
-      sender: string,
-      toChain: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -517,39 +567,39 @@ export class MixSender extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    received(
+    sended(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "received(address,uint256,uint256)"(
+    "sended(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    receiveOverHorizon(
-      fromChain: BigNumberish,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
-      fromChain: BigNumberish,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
     ): Promise<BigNumber>;
 
     mix(overrides?: CallOverrides): Promise<BigNumber>;
 
     "mix()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    sendOverHorizon(
+      toChain: BigNumberish,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "sendOverHorizon(uint256,address,uint256)"(
+      toChain: BigNumberish,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -563,33 +613,55 @@ export class MixSender extends Contract {
   };
 
   populateTransaction: {
-    sendOverHorizon(
-      toChain: BigNumberish,
+    receiveOverHorizon(
+      fromChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
       amount: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "sendOverHorizon(uint256,uint256)"(
-      toChain: BigNumberish,
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
+      fromChain: BigNumberish,
+      sender: string,
+      sendId: BigNumberish,
       amount: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    received(
+      arg0: string,
+      arg1: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "received(address,uint256,address,uint256)"(
+      arg0: string,
+      arg1: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     signer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "signer()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    sended(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+    sendCount(
+      sender: string,
+      toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "sended(address,uint256,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+    "sendCount(address,uint256,address)"(
+      sender: string,
+      toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -607,18 +679,6 @@ export class MixSender extends Contract {
 
     "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    sendCount(
-      sender: string,
-      toChain: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "sendCount(address,uint256)"(
-      sender: string,
-      toChain: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -627,39 +687,39 @@ export class MixSender extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    received(
+    sended(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "received(address,uint256,uint256)"(
+    "sended(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    receiveOverHorizon(
-      fromChain: BigNumberish,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
-      fromChain: BigNumberish,
-      sendId: BigNumberish,
-      amount: BigNumberish,
-      signature: BytesLike,
-      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     mix(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "mix()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    sendOverHorizon(
+      toChain: BigNumberish,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "sendOverHorizon(uint256,address,uint256)"(
+      toChain: BigNumberish,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: string,

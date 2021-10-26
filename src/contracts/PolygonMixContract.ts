@@ -8,7 +8,7 @@ import ERC20Contract from "./polygon-standard/ERC20Contract";
 class PolygonMixContract extends ERC20Contract<PolygonMix> implements MixSenderInterface {
 
     constructor() {
-        super("0x1F90b5665F1EA436280eB82eF2024146219A82de", PolygonMixArtifact.abi, []);
+        super("0xc03814F937f790422b79ccc669d398C5167AE853", PolygonMixArtifact.abi, []);
         PolygonWallet.toss("connect", this);
     }
 
@@ -20,26 +20,26 @@ class PolygonMixContract extends ERC20Contract<PolygonMix> implements MixSenderI
         await PolygonWallet.connect();
     }
 
-    public async sendOverHorizon(toChain: BigNumberish, amount: BigNumberish) {
+    public async sendOverHorizon(toChain: BigNumberish, receiver: string, amount: BigNumberish) {
         const contract = await this.connectAndGetWalletContract();
-        await contract?.sendOverHorizon(toChain, amount);
+        await contract?.sendOverHorizon(toChain, receiver, amount);
     }
 
-    public async sended(sender: string, amount: BigNumberish, index: BigNumberish): Promise<BigNumber> {
-        return await this.contract.sended(sender, amount, index);
+    public async sended(sender: string, toChain: BigNumberish, receiver: string, index: BigNumberish): Promise<BigNumber> {
+        return await this.contract.sended(sender, toChain, receiver, index);
     }
 
-    public async sendCount(sender: string, toChain: BigNumberish): Promise<BigNumber> {
-        return await this.contract.sendCount(sender, toChain);
+    public async sendCount(sender: string, toChain: BigNumberish, receiver: string): Promise<BigNumber> {
+        return await this.contract.sendCount(sender, toChain, receiver);
     }
 
-    public async receiveOverHorizon(fromChain: BigNumberish, sendId: BigNumberish, amount: BigNumberish, signature: string) {
+    public async receiveOverHorizon(fromChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish, signature: string) {
         const contract = await this.connectAndGetWalletContract();
-        await contract?.receiveOverHorizon(fromChain, sendId, amount, signature);
+        await contract?.receiveOverHorizon(fromChain, sender, sendId, amount, signature);
     }
 
-    public async received(receiver: string, amount: BigNumberish, sendId: BigNumberish): Promise<boolean> {
-        return await this.contract.received(receiver, amount, sendId);
+    public async received(receiver: string, fromChain: BigNumberish, sender: string, sendId: BigNumberish): Promise<boolean> {
+        return await this.contract.received(receiver, fromChain, sender, sendId);
     }
 
     public async getTransferEvents(to: string, startBlock: number, endBlock: number) {

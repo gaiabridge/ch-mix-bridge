@@ -5,10 +5,10 @@ export default interface MixSenderInterface {
     loadAddress(): Promise<string | undefined>;
     connect(): Promise<void>;
     balanceOf(owner: string): Promise<BigNumber>;
-    sendOverHorizon(toChain: BigNumberish, amount: BigNumberish): Promise<void>;
-    sended(sender: string, amount: BigNumberish, index: BigNumberish): Promise<BigNumber>;
-    sendCount(sender: string, toChain: BigNumberish): Promise<BigNumber>;
-    receiveOverHorizon(fromChain: BigNumberish, sendId: BigNumberish, amount: BigNumberish, signature: string): Promise<void>;
-    received(receiver: string, amount: BigNumberish, sendId: BigNumberish): Promise<boolean>;
+    sendOverHorizon(toChain: BigNumberish, receiver: string, amount: BigNumberish): Promise<void>;
+    sended(sender: string, toChain: BigNumberish, receiver: string, index: BigNumberish): Promise<BigNumber>;
+    sendCount(sender: string, toChain: BigNumberish, receiver: string): Promise<BigNumber>;
+    receiveOverHorizon(fromChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish, signature: string): Promise<void>;
+    received(receiver: string, fromChain: BigNumberish, sender: string, sendId: BigNumberish): Promise<boolean>;
 }
 //# sourceMappingURL=MixSenderInterface.d.ts.map

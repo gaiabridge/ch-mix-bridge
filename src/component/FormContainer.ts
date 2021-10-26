@@ -32,24 +32,17 @@ export default class FormContainer extends DomNode {
     }
 
     public async sendOverHorizon(amount: BigNumber) {
-        if (this.fromForm.sender !== undefined) {
-            const owner = await this.fromForm.sender.loadAddress();
-            if (owner !== undefined) {
-                await this.fromForm.sender.sendOverHorizon(this.toForm.chainId, amount);
-                const count = await this.fromForm.sender.sendCount(owner, this.toForm.chainId);
-                console.log({
-                    address: owner,
-                    fromChain: this.fromForm.chainId,
-                    sendId: count.toNumber() - 1,
-                    amount: amount.toString(),
-                })
-                const signed = await superagent.post("https://localhost:1023/signsend").send({
-                    address: owner,
-                    fromChain: this.fromForm.chainId,
-                    sendId: count.toNumber() - 1,
-                    amount: amount.toString(),
-                });
-                console.log(signed);
+        if (this.fromForm.sender !== undefined && this.toForm.sender !== undefined) {
+            const sender = await this.fromForm.sender.loadAddress();
+            const receiver = await this.toForm.sender.loadAddress();
+            if (sender !== undefined && receiver !== undefined) {
+                await this.fromForm.sender.sendOverHorizon(this.toForm.chainId, receiver, amount);
+                const count = await this.fromForm.sender.sendCount(sender, this.toForm.chainId, receiver);
+
+                const sendId = count.toNumber() - 1;
+                const result = await superagent.get(`https://api.chainhorizon.org/signsend?receiver=${receiver}&fromChain=${this.fromForm.chainId}&sender=${sender}&sendId=${sendId}&amount=${amount.toString()}`).send();
+
+                await this.toForm.sender.receiveOverHorizon(this.fromForm.chainId, sender, sendId, amount, result.text);
             }
         }
     }

@@ -52,6 +52,18 @@ const _abi = [
         type: "address",
       },
       {
+        indexed: true,
+        internalType: "uint256",
+        name: "fromChain",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
         indexed: false,
         internalType: "uint256",
         name: "amount",
@@ -68,6 +80,18 @@ const _abi = [
         indexed: true,
         internalType: "address",
         name: "sender",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "toChain",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "receiver",
         type: "address",
       },
       {
@@ -281,6 +305,11 @@ const _abi = [
         type: "uint256",
       },
       {
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "sendId",
         type: "uint256",
@@ -314,6 +343,11 @@ const _abi = [
         type: "uint256",
       },
       {
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "sendId",
         type: "uint256",
@@ -342,6 +376,11 @@ const _abi = [
         name: "toChain",
         type: "uint256",
       },
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address",
+      },
     ],
     name: "sendCount",
     outputs: [
@@ -360,6 +399,11 @@ const _abi = [
         internalType: "uint256",
         name: "toChain",
         type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address",
       },
       {
         internalType: "uint256",
@@ -389,6 +433,11 @@ const _abi = [
         internalType: "uint256",
         name: "toChain",
         type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address",
       },
       {
         internalType: "uint256",

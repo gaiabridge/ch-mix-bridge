@@ -20,12 +20,4 @@ import History from "./component/History";
         ),
         el("footer", el("a", "© Chain Horizon", { href: "https://chainhorizon.org", target: "_blank" })),
     );
-
-    const signed = await superagent.get("https://localhost:1023/signsend").send({
-        address: "0x5d3C6E36538f485C3483B1C0d3e27a3416E16217",
-        amount: "1000000000000000",
-        fromChain: 8217,
-        sendId: 4,
-    });
-    console.log(signed);
 })();

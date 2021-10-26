@@ -21,23 +21,61 @@ const _abi = [
     constant: false,
     inputs: [
       {
-        name: "toChain",
+        name: "fromChain",
+        type: "uint256",
+      },
+      {
+        name: "sender",
+        type: "address",
+      },
+      {
+        name: "sendId",
         type: "uint256",
       },
       {
         name: "amount",
         type: "uint256",
       },
+      {
+        name: "signature",
+        type: "bytes",
+      },
     ],
-    name: "sendOverHorizon",
-    outputs: [
+    name: "receiveOverHorizon",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "receiver",
+        type: "address",
+      },
+      {
+        name: "fromChain",
+        type: "uint256",
+      },
+      {
+        name: "sender",
+        type: "address",
+      },
       {
         name: "sendId",
         type: "uint256",
       },
     ],
+    name: "received",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -66,14 +104,14 @@ const _abi = [
         type: "uint256",
       },
       {
-        name: "index",
-        type: "uint256",
+        name: "receiver",
+        type: "address",
       },
     ],
-    name: "sended",
+    name: "sendCount",
     outputs: [
       {
-        name: "amount",
+        name: "",
         type: "uint256",
       },
     ],
@@ -92,39 +130,20 @@ const _abi = [
         name: "toChain",
         type: "uint256",
       },
-    ],
-    name: "sendCount",
-    outputs: [
-      {
-        name: "",
-        type: "uint256",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [
       {
         name: "receiver",
         type: "address",
       },
       {
-        name: "fromChain",
-        type: "uint256",
-      },
-      {
-        name: "sendId",
+        name: "index",
         type: "uint256",
       },
     ],
-    name: "received",
+    name: "sended",
     outputs: [
       {
-        name: "",
-        type: "bool",
+        name: "amount",
+        type: "uint256",
       },
     ],
     payable: false,
@@ -135,24 +154,25 @@ const _abi = [
     constant: false,
     inputs: [
       {
-        name: "fromChain",
+        name: "toChain",
         type: "uint256",
       },
       {
-        name: "sendId",
-        type: "uint256",
+        name: "receiver",
+        type: "address",
       },
       {
         name: "amount",
         type: "uint256",
       },
+    ],
+    name: "sendOverHorizon",
+    outputs: [
       {
-        name: "signature",
-        type: "bytes",
+        name: "sendId",
+        type: "uint256",
       },
     ],
-    name: "receiveOverHorizon",
-    outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
@@ -178,6 +198,16 @@ const _abi = [
         type: "address",
       },
       {
+        indexed: true,
+        name: "toChain",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        name: "receiver",
+        type: "address",
+      },
+      {
         indexed: false,
         name: "amount",
         type: "uint256",
@@ -192,6 +222,16 @@ const _abi = [
       {
         indexed: true,
         name: "receiver",
+        type: "address",
+      },
+      {
+        indexed: true,
+        name: "fromChain",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        name: "sender",
         type: "address",
       },
       {

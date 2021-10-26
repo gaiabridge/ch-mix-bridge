@@ -34,12 +34,12 @@ interface PolygonMixInterface extends ethers.utils.Interface {
     "nonces(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)": FunctionFragment;
-    "received(address,uint256,uint256)": FunctionFragment;
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)": FunctionFragment;
+    "received(address,uint256,address,uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "sendCount(address,uint256)": FunctionFragment;
-    "sendOverHorizon(uint256,uint256)": FunctionFragment;
-    "sended(address,uint256,uint256)": FunctionFragment;
+    "sendCount(address,uint256,address)": FunctionFragment;
+    "sendOverHorizon(uint256,address,uint256)": FunctionFragment;
+    "sended(address,uint256,address,uint256)": FunctionFragment;
     "setSigner(address)": FunctionFragment;
     "signer()": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -93,11 +93,11 @@ interface PolygonMixInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "receiveOverHorizon",
-    values: [BigNumberish, BigNumberish, BigNumberish, BytesLike]
+    values: [BigNumberish, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "received",
-    values: [string, BigNumberish, BigNumberish]
+    values: [string, BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -105,15 +105,15 @@ interface PolygonMixInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "sendCount",
-    values: [string, BigNumberish]
+    values: [string, BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "sendOverHorizon",
-    values: [BigNumberish, BigNumberish]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "sended",
-    values: [string, BigNumberish, BigNumberish]
+    values: [string, BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "setSigner", values: [string]): string;
   encodeFunctionData(functionFragment: "signer", values?: undefined): string;
@@ -196,8 +196,8 @@ interface PolygonMixInterface extends ethers.utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "ReceiveOverHorizon(address,uint256)": EventFragment;
-    "SendOverHorizon(address,uint256)": EventFragment;
+    "ReceiveOverHorizon(address,uint256,address,uint256)": EventFragment;
+    "SendOverHorizon(address,uint256,address,uint256)": EventFragment;
     "SetSigner(address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
@@ -330,14 +330,16 @@ export class PolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
       signature: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
       signature: BytesLike,
@@ -347,14 +349,16 @@ export class PolygonMix extends Contract {
     received(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    "received(address,uint256,uint256)"(
+    "received(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
@@ -365,23 +369,27 @@ export class PolygonMix extends Contract {
     sendCount(
       sender: string,
       toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "sendCount(address,uint256)"(
+    "sendCount(address,uint256,address)"(
       sender: string,
       toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     sendOverHorizon(
       toChain: BigNumberish,
+      receiver: string,
       amount: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "sendOverHorizon(uint256,uint256)"(
+    "sendOverHorizon(uint256,address,uint256)"(
       toChain: BigNumberish,
+      receiver: string,
       amount: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -389,14 +397,16 @@ export class PolygonMix extends Contract {
     sended(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "sended(address,uint256,uint256)"(
+    "sended(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -569,14 +579,16 @@ export class PolygonMix extends Contract {
 
   receiveOverHorizon(
     fromChain: BigNumberish,
+    sender: string,
     sendId: BigNumberish,
     amount: BigNumberish,
     signature: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
+  "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
     fromChain: BigNumberish,
+    sender: string,
     sendId: BigNumberish,
     amount: BigNumberish,
     signature: BytesLike,
@@ -586,14 +598,16 @@ export class PolygonMix extends Contract {
   received(
     arg0: string,
     arg1: BigNumberish,
-    arg2: BigNumberish,
+    arg2: string,
+    arg3: BigNumberish,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  "received(address,uint256,uint256)"(
+  "received(address,uint256,address,uint256)"(
     arg0: string,
     arg1: BigNumberish,
-    arg2: BigNumberish,
+    arg2: string,
+    arg3: BigNumberish,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -604,23 +618,27 @@ export class PolygonMix extends Contract {
   sendCount(
     sender: string,
     toChain: BigNumberish,
+    receiver: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "sendCount(address,uint256)"(
+  "sendCount(address,uint256,address)"(
     sender: string,
     toChain: BigNumberish,
+    receiver: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   sendOverHorizon(
     toChain: BigNumberish,
+    receiver: string,
     amount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "sendOverHorizon(uint256,uint256)"(
+  "sendOverHorizon(uint256,address,uint256)"(
     toChain: BigNumberish,
+    receiver: string,
     amount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -628,14 +646,16 @@ export class PolygonMix extends Contract {
   sended(
     arg0: string,
     arg1: BigNumberish,
-    arg2: BigNumberish,
+    arg2: string,
+    arg3: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "sended(address,uint256,uint256)"(
+  "sended(address,uint256,address,uint256)"(
     arg0: string,
     arg1: BigNumberish,
-    arg2: BigNumberish,
+    arg2: string,
+    arg3: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -804,14 +824,16 @@ export class PolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
       signature: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
       signature: BytesLike,
@@ -821,14 +843,16 @@ export class PolygonMix extends Contract {
     received(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "received(address,uint256,uint256)"(
+    "received(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -839,23 +863,27 @@ export class PolygonMix extends Contract {
     sendCount(
       sender: string,
       toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sendCount(address,uint256)"(
+    "sendCount(address,uint256,address)"(
       sender: string,
       toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     sendOverHorizon(
       toChain: BigNumberish,
+      receiver: string,
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sendOverHorizon(uint256,uint256)"(
+    "sendOverHorizon(uint256,address,uint256)"(
       toChain: BigNumberish,
+      receiver: string,
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -863,14 +891,16 @@ export class PolygonMix extends Contract {
     sended(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sended(address,uint256,uint256)"(
+    "sended(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -946,9 +976,19 @@ export class PolygonMix extends Contract {
       newOwner: string | null
     ): EventFilter;
 
-    ReceiveOverHorizon(receiver: string | null, amount: null): EventFilter;
+    ReceiveOverHorizon(
+      receiver: string | null,
+      fromChain: BigNumberish | null,
+      sender: string | null,
+      amount: null
+    ): EventFilter;
 
-    SendOverHorizon(sender: string | null, amount: null): EventFilter;
+    SendOverHorizon(
+      sender: string | null,
+      toChain: BigNumberish | null,
+      receiver: string | null,
+      amount: null
+    ): EventFilter;
 
     SetSigner(signer: string | null): EventFilter;
 
@@ -1062,14 +1102,16 @@ export class PolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
       signature: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
       signature: BytesLike,
@@ -1079,14 +1121,16 @@ export class PolygonMix extends Contract {
     received(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "received(address,uint256,uint256)"(
+    "received(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1097,23 +1141,27 @@ export class PolygonMix extends Contract {
     sendCount(
       sender: string,
       toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sendCount(address,uint256)"(
+    "sendCount(address,uint256,address)"(
       sender: string,
       toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     sendOverHorizon(
       toChain: BigNumberish,
+      receiver: string,
       amount: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "sendOverHorizon(uint256,uint256)"(
+    "sendOverHorizon(uint256,address,uint256)"(
       toChain: BigNumberish,
+      receiver: string,
       amount: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
@@ -1121,14 +1169,16 @@ export class PolygonMix extends Contract {
     sended(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sended(address,uint256,uint256)"(
+    "sended(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1309,14 +1359,16 @@ export class PolygonMix extends Contract {
 
     receiveOverHorizon(
       fromChain: BigNumberish,
+      sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
       signature: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "receiveOverHorizon(uint256,uint256,uint256,bytes)"(
+    "receiveOverHorizon(uint256,address,uint256,uint256,bytes)"(
       fromChain: BigNumberish,
+      sender: string,
       sendId: BigNumberish,
       amount: BigNumberish,
       signature: BytesLike,
@@ -1326,14 +1378,16 @@ export class PolygonMix extends Contract {
     received(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "received(address,uint256,uint256)"(
+    "received(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1344,23 +1398,27 @@ export class PolygonMix extends Contract {
     sendCount(
       sender: string,
       toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "sendCount(address,uint256)"(
+    "sendCount(address,uint256,address)"(
       sender: string,
       toChain: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     sendOverHorizon(
       toChain: BigNumberish,
+      receiver: string,
       amount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "sendOverHorizon(uint256,uint256)"(
+    "sendOverHorizon(uint256,address,uint256)"(
       toChain: BigNumberish,
+      receiver: string,
       amount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -1368,14 +1426,16 @@ export class PolygonMix extends Contract {
     sended(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "sended(address,uint256,uint256)"(
+    "sended(address,uint256,address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg2: string,
+      arg3: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
