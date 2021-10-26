@@ -1,0 +1,1 @@
+{"version":3,"file":"KlaytnWallet.d.ts","sourceRoot":"","sources":["../../src/klaytn/KlaytnWallet.ts"],"names":[],"mappings":"AAAA,OAAO,cAAc,MAAM,gBAAgB,CAAC;AAG5C,cAAM,YAAa,SAAQ,cAAc;;YASvB,cAAc;IAMf,WAAW,IAAI,OAAO,CAAC,MAAM,GAAG,SAAS,CAAC;IAM1C,SAAS;IAIT,OAAO;CAOvB;;AAED,wBAAkC"}
