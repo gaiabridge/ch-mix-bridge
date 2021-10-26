@@ -1,4 +1,5 @@
 import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
+import Klaytn from "../klaytn/Klaytn";
 import KlaytnWallet from "../klaytn/KlaytnWallet";
 import MixSenderArtifact from "./abi/pmix/artifacts/contracts/MixSender.sol/MixSender.json";
 import KlaytnContract from "./KlaytnContract";
@@ -10,6 +11,31 @@ class MixSenderContract extends KlaytnContract implements MixSenderInterface {
     constructor() {
         super("0xfD6F034B54CF2bcA1eDbA063F5f9Dc5979a72604", MixSenderArtifact.abi);
         KlaytnWallet.toss("connect", this);
+        this.watch();
+    }
+
+    private async watch() {
+        let prevBlock = await Klaytn.loadBlockNumber();
+        setInterval(async () => {
+            const currentBlock = await Klaytn.loadBlockNumber();
+            const transferEvents = await MixContract.getTransferEvents(prevBlock, currentBlock);
+            for (const event of transferEvents) {
+                this.fireEvent("Transfer", ...event.returnValues);
+            }
+            const rceiveOverHorizonEvents = await this.getReceiveOverHorizonEvents(prevBlock, currentBlock);
+            for (const event of rceiveOverHorizonEvents) {
+                this.fireEvent("ReceiveOverHorizon", ...event.returnValues);
+            }
+            prevBlock = currentBlock + 1;
+        }, 2000);
+    }
+
+    private async getReceiveOverHorizonEvents(startBlock: number, endBlock: number) {
+        const events = await this.contract.getPastEvents("ReceiveOverHorizon", {
+            fromBlock: startBlock,
+            toBlock: endBlock,
+        });
+        return events;
     }
 
     public async loadAddress(): Promise<string | undefined> {

@@ -35,9 +35,8 @@ export default abstract class KIP7Contract extends KlaytnContract {
         await this.runWalletMethod("approve", spender, amount);
     }
 
-    public async getTransferEvents(to: string, startBlock: number, endBlock: number) {
+    public async getTransferEvents(startBlock: number, endBlock: number) {
         const events = await this.contract.getPastEvents("Transfer", {
-            filter: { to },
             fromBlock: startBlock,
             toBlock: endBlock,
         });

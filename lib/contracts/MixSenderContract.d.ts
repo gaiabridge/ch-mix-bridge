@@ -3,6 +3,8 @@ import KlaytnContract from "./KlaytnContract";
 import MixSenderInterface from "./MixSenderInterface";
 declare class MixSenderContract extends KlaytnContract implements MixSenderInterface {
     constructor();
+    private watch;
+    private getReceiveOverHorizonEvents;
     loadAddress(): Promise<string | undefined>;
     connect(): Promise<void>;
     balanceOf(owner: string): Promise<BigNumber>;
