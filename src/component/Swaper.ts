@@ -102,8 +102,12 @@ export default class Swaper extends DomNode {
         if (this.fromForm.sender !== undefined && this.toForm.sender !== undefined && this.toForm.chainId.toString() === toChain.toString()) {
             const receiver = await this.toForm.sender.loadAddress();
             if (receiver === _receiver) {
-                const result = await superagent.get(`https://api.chainhorizon.org/mix/signsend?receiver=${receiver}&fromChain=${this.fromForm.chainId}&toChain=${this.toForm.chainId}&sender=${sender}&sendId=${sendId}&amount=${amount.toString()}`).send();
-                await this.toForm.sender.receiveOverHorizon(this.fromForm.chainId, this.toForm.chainId, sender, sendId, amount, result.text);
+                try {
+                    const result = await superagent.get(`https://api.chainhorizon.org/mix/signsend?receiver=${receiver}&fromChain=${this.fromForm.chainId}&toChain=${this.toForm.chainId}&sender=${sender}&sendId=${sendId}&amount=${amount.toString()}`).send();
+                    await this.toForm.sender.receiveOverHorizon(this.fromForm.chainId, this.toForm.chainId, sender, sendId, amount, result.text);
+                } catch (error) {
+                    alert(`Error: ${error}`);
+                }
             }
         }
     }
