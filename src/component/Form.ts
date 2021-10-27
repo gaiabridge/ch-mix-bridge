@@ -107,7 +107,10 @@ export default class Form extends DomNode {
 
     private sendOverHorizonHandler = async (sender: string, toChain: BigNumber, receiver: string, sendId: BigNumber, amount: BigNumber) => {
         this.swaper.receiveOverHorizon(receiver, toChain, sender, sendId, amount);
-        this.swaper.addSended(sender, receiver, sendId);
+        const owner = await this.sender?.loadAddress();
+        if (sender === owner) {
+            this.swaper.addSended(sender, receiver, sendId);
+        }
     }
 
     public delete() {
