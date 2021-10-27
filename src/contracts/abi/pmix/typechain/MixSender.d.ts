@@ -104,8 +104,8 @@ interface MixSenderInterface extends ethers.utils.Interface {
 
   events: {
     "SetSigner(address)": EventFragment;
-    "SendOverHorizon(address,uint256,address,uint256)": EventFragment;
-    "ReceiveOverHorizon(address,uint256,address,uint256)": EventFragment;
+    "SendOverHorizon(address,uint256,address,uint256,uint256)": EventFragment;
+    "ReceiveOverHorizon(address,uint256,address,uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
@@ -492,6 +492,7 @@ export class MixSender extends Contract {
       sender: string | null,
       toChain: BigNumberish | null,
       receiver: string | null,
+      sendId: null,
       amount: null
     ): EventFilter;
 
@@ -499,6 +500,7 @@ export class MixSender extends Contract {
       receiver: string | null,
       fromChain: BigNumberish | null,
       sender: string | null,
+      sendId: null,
       amount: null
     ): EventFilter;
 

@@ -203,8 +203,8 @@ interface PolygonMixInterface extends ethers.utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "ReceiveOverHorizon(address,uint256,address,uint256)": EventFragment;
-    "SendOverHorizon(address,uint256,address,uint256)": EventFragment;
+    "ReceiveOverHorizon(address,uint256,address,uint256,uint256)": EventFragment;
+    "SendOverHorizon(address,uint256,address,uint256,uint256)": EventFragment;
     "SetSigner(address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
@@ -993,6 +993,7 @@ export class PolygonMix extends Contract {
       receiver: string | null,
       fromChain: BigNumberish | null,
       sender: string | null,
+      sendId: null,
       amount: null
     ): EventFilter;
 
@@ -1000,6 +1001,7 @@ export class PolygonMix extends Contract {
       sender: string | null,
       toChain: BigNumberish | null,
       receiver: string | null,
+      sendId: null,
       amount: null
     ): EventFilter;
 

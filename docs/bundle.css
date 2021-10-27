@@ -286,7 +286,7 @@ footer {
     width: auto;
   }
 }
-.swaper .history {
+.swaper > .history {
   margin-top: 20px;
   background-color: #1f1f1f;
   color: #fff;
@@ -295,7 +295,37 @@ footer {
   height: 160px;
   border-radius: 8px;
 }
-.swaper .history > h2 {
+.swaper > .history > h2 {
   font-weight: bold;
+}
+.swaper > .history > .sended-list {
+  margin-top: 8px;
+}
+.swaper > .history > .sended-list > .sended {
+  padding: 5px 0;
+}
+.swaper > .history > .sended-list > .sended:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.swaper > .history > .sended-list > .sended > .message {
+  float: left;
+}
+.swaper > .history > .sended-list > .sended > .done,
+.swaper > .history > .sended-list > .sended > .retry-button {
+  float: right;
+}
+.swaper > .history > .sended-list > .sended > .retry-button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
 }
 

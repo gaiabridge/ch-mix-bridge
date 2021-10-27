@@ -9,7 +9,7 @@ import MixSenderInterface from "./MixSenderInterface";
 class MixSenderContract extends KlaytnContract implements MixSenderInterface {
 
     constructor() {
-        super("0xfD6F034B54CF2bcA1eDbA063F5f9Dc5979a72604", MixSenderArtifact.abi);
+        super("0xDeE2b8539c2321450a99f6728633DEf8d069262F", MixSenderArtifact.abi);
         KlaytnWallet.toss("connect", this);
         this.watch();
     }
@@ -20,15 +20,15 @@ class MixSenderContract extends KlaytnContract implements MixSenderInterface {
             const currentBlock = await Klaytn.loadBlockNumber();
             const transferEvents = await MixContract.getTransferEvents(prevBlock, currentBlock);
             for (const event of transferEvents) {
-                this.fireEvent("Transfer", event.returnValues[0], event.returnValues[1], event.returnValues[2]);
+                this.fireEvent("Transfer", event.returnValues[0], event.returnValues[1], BigNumber.from(event.returnValues[2]));
             }
             const sendOverHorizonEvents = await this.getSendOverHorizonEvents(prevBlock, currentBlock);
             for (const event of sendOverHorizonEvents) {
-                this.fireEvent("SendOverHorizon", event.returnValues[0], event.returnValues[1], event.returnValues[2], event.returnValues[3]);
+                this.fireEvent("SendOverHorizon", event.returnValues[0], BigNumber.from(event.returnValues[1]), event.returnValues[2], BigNumber.from(event.returnValues[3]), BigNumber.from(event.returnValues[4]));
             }
             const receiveOverHorizonEvents = await this.getReceiveOverHorizonEvents(prevBlock, currentBlock);
             for (const event of receiveOverHorizonEvents) {
-                this.fireEvent("ReceiveOverHorizon", event.returnValues[0], event.returnValues[1], event.returnValues[2], event.returnValues[3], event.returnValues[4]);
+                this.fireEvent("ReceiveOverHorizon", event.returnValues[0], BigNumber.from(event.returnValues[1]), event.returnValues[2], BigNumber.from(event.returnValues[3]), BigNumber.from(event.returnValues[4]));
             }
             prevBlock = currentBlock + 1;
         }, 2000);

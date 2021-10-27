@@ -66,6 +66,12 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
+        name: "sendId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
         name: "amount",
         type: "uint256",
       },
@@ -93,6 +99,12 @@ const _abi = [
         internalType: "address",
         name: "receiver",
         type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "sendId",
+        type: "uint256",
       },
       {
         indexed: false,
@@ -446,7 +458,7 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "index",
+        name: "sendId",
         type: "uint256",
       },
     ],

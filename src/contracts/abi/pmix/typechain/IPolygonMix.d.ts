@@ -151,8 +151,8 @@ interface IPolygonMixInterface extends ethers.utils.Interface {
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
-    "ReceiveOverHorizon(address,uint256,address,uint256)": EventFragment;
-    "SendOverHorizon(address,uint256,address,uint256)": EventFragment;
+    "ReceiveOverHorizon(address,uint256,address,uint256,uint256)": EventFragment;
+    "SendOverHorizon(address,uint256,address,uint256,uint256)": EventFragment;
     "SetSigner(address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
@@ -314,7 +314,7 @@ export class IPolygonMix extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amount: BigNumber }>;
 
@@ -322,7 +322,7 @@ export class IPolygonMix extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amount: BigNumber }>;
 
@@ -501,7 +501,7 @@ export class IPolygonMix extends Contract {
     sender: string,
     toChain: BigNumberish,
     receiver: string,
-    index: BigNumberish,
+    sendId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -509,7 +509,7 @@ export class IPolygonMix extends Contract {
     sender: string,
     toChain: BigNumberish,
     receiver: string,
-    index: BigNumberish,
+    sendId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -684,7 +684,7 @@ export class IPolygonMix extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -692,7 +692,7 @@ export class IPolygonMix extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -746,6 +746,7 @@ export class IPolygonMix extends Contract {
       receiver: string | null,
       fromChain: BigNumberish | null,
       sender: string | null,
+      sendId: null,
       amount: null
     ): EventFilter;
 
@@ -753,6 +754,7 @@ export class IPolygonMix extends Contract {
       sender: string | null,
       toChain: BigNumberish | null,
       receiver: string | null,
+      sendId: null,
       amount: null
     ): EventFilter;
 
@@ -898,7 +900,7 @@ export class IPolygonMix extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -906,7 +908,7 @@ export class IPolygonMix extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1096,7 +1098,7 @@ export class IPolygonMix extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1104,7 +1106,7 @@ export class IPolygonMix extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

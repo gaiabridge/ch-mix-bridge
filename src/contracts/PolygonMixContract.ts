@@ -8,7 +8,11 @@ import ERC20Contract from "./polygon-standard/ERC20Contract";
 class PolygonMixContract extends ERC20Contract<PolygonMix> implements MixSenderInterface {
 
     constructor() {
-        super("0x7dB57d19a9C7Be33896C74301949fE1B2F9c1480", PolygonMixArtifact.abi, []);
+        super("0x5085a6879Af6767732c51CA0fc7422d41d9aAEf6", PolygonMixArtifact.abi, [
+            "SetSigner",
+            "SendOverHorizon",
+            "ReceiveOverHorizon",
+        ]);
         PolygonWallet.toss("connect", this);
     }
 

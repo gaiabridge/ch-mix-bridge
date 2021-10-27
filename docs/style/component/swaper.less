@@ -84,7 +84,7 @@
         }
     }
 
-    .history {
+    >.history {
         margin-top      : 20px;
         background-color: #1f1f1f;
         color           : #fff;
@@ -95,6 +95,34 @@
 
         >h2 {
             font-weight: bold;
+        }
+
+        >.sended-list {
+            margin-top: 8px;
+
+            >.sended {
+                padding: 5px 0;
+                .float-wrapper();
+
+                >.message {
+                    float: left;
+                }
+
+                >.done,
+                >.retry-button {
+                    float: right;
+                }
+
+                >.retry-button {
+                    padding        : 8px 12px;
+                    border-radius  : 8px;
+                    font-size      : 14px;
+                    display        : flex;
+                    justify-content: center;
+                    text-align     : center;
+                    background     : linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
+                }
+            }
         }
     }
 }

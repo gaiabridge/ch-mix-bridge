@@ -139,7 +139,7 @@ const _abi = [
         type: "address",
       },
       {
-        name: "index",
+        name: "sendId",
         type: "uint256",
       },
     ],
@@ -213,6 +213,11 @@ const _abi = [
       },
       {
         indexed: false,
+        name: "sendId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
         name: "amount",
         type: "uint256",
       },
@@ -237,6 +242,11 @@ const _abi = [
         indexed: true,
         name: "sender",
         type: "address",
+      },
+      {
+        indexed: false,
+        name: "sendId",
+        type: "uint256",
       },
       {
         indexed: false,

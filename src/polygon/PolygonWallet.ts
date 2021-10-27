@@ -22,7 +22,7 @@ class PolygonWallet extends EventContainer {
                 this.fireEvent("chainchange", BigNumber.from(chainId).toNumber());
             });
         } else {
-            this.walletConnectProvider = new WalletConnectProvider({ rpc: "https://polygon-rpc.com/" });
+            this.walletConnectProvider = new WalletConnectProvider({ rpc: "wss://rpc-mainnet.matic.quiknode.pro" });
             this.provider = new ethers.providers.Web3Provider(this.walletConnectProvider);
             this.walletConnectProvider.on("chainChanged", (chainId: number) => {
                 this.fireEvent("chainchange", chainId);

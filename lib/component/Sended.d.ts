@@ -11,5 +11,7 @@ export default class Sended extends DomNode {
     private retry;
     constructor(fromSender: MixSenderInterface, toSender: MixSenderInterface, fromChain: number, toChain: number, sender: string, receiver: string, sendId: number, retry: () => void);
     private load;
+    private receiveOverHorizonHandler;
+    delete(): void;
 }
 //# sourceMappingURL=Sended.d.ts.map

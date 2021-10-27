@@ -74,8 +74,8 @@ interface IMixSenderInterface extends ethers.utils.Interface {
 
   events: {
     "SetSigner(address)": EventFragment;
-    "SendOverHorizon(address,uint256,address,uint256)": EventFragment;
-    "ReceiveOverHorizon(address,uint256,address,uint256)": EventFragment;
+    "SendOverHorizon(address,uint256,address,uint256,uint256)": EventFragment;
+    "ReceiveOverHorizon(address,uint256,address,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "SetSigner"): EventFragment;
@@ -155,7 +155,7 @@ export class IMixSender extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amount: BigNumber }>;
 
@@ -163,7 +163,7 @@ export class IMixSender extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amount: BigNumber }>;
 
@@ -236,7 +236,7 @@ export class IMixSender extends Contract {
     sender: string,
     toChain: BigNumberish,
     receiver: string,
-    index: BigNumberish,
+    sendId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -244,7 +244,7 @@ export class IMixSender extends Contract {
     sender: string,
     toChain: BigNumberish,
     receiver: string,
-    index: BigNumberish,
+    sendId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -321,7 +321,7 @@ export class IMixSender extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -329,7 +329,7 @@ export class IMixSender extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -355,6 +355,7 @@ export class IMixSender extends Contract {
       sender: string | null,
       toChain: BigNumberish | null,
       receiver: string | null,
+      sendId: null,
       amount: null
     ): EventFilter;
 
@@ -362,6 +363,7 @@ export class IMixSender extends Contract {
       receiver: string | null,
       fromChain: BigNumberish | null,
       sender: string | null,
+      sendId: null,
       amount: null
     ): EventFilter;
   };
@@ -425,7 +427,7 @@ export class IMixSender extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -433,7 +435,7 @@ export class IMixSender extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -511,7 +513,7 @@ export class IMixSender extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -519,7 +521,7 @@ export class IMixSender extends Contract {
       sender: string,
       toChain: BigNumberish,
       receiver: string,
-      index: BigNumberish,
+      sendId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

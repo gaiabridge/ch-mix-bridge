@@ -1,4 +1,4 @@
-import { BigNumberish } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { DomNode, el } from "@hanul/skynode";
 import SkyUtil from "skyutil";
 import superagent from "superagent";
@@ -63,26 +63,29 @@ export default class Swaper extends DomNode {
                 this.sendedList.empty();
 
                 SkyUtil.repeatResultAsync(count.toNumber(), async (sendId) => {
-
-                    if (this.loadHistoryNonce === nonce && this.fromForm.sender !== undefined && this.toForm.sender !== undefined) {
-                        this.sendedList.append(
-                            new Sended(
-                                this.fromForm.sender,
-                                this.toForm.sender,
-                                this.fromForm.chainId,
-                                this.toForm.chainId,
-                                sender, receiver, sendId,
-                                async () => {
-                                    if (this.fromForm.sender !== undefined) {
-                                        const sended = await this.fromForm.sender.sended(sender, this.toForm.chainId, receiver, sendId);
-                                        this.receiveOverHorizon(receiver, this.toForm.chainId, sender, sendId, sended);
-                                    }
-                                },
-                            ),
-                        );
+                    if (this.loadHistoryNonce === nonce) {
+                        this.addSended(sender, receiver, BigNumber.from(sendId));
                     }
                 });
             }
+        }
+    }
+
+    public addSended(sender: string, receiver: string, sendId: BigNumber) {
+        if (this.fromForm.sender !== undefined && this.toForm.sender !== undefined) {
+            new Sended(
+                this.fromForm.sender,
+                this.toForm.sender,
+                this.fromForm.chainId,
+                this.toForm.chainId,
+                sender, receiver, sendId.toNumber(),
+                async () => {
+                    if (this.fromForm.sender !== undefined) {
+                        const sended = await this.fromForm.sender.sended(sender, this.toForm.chainId, receiver, sendId);
+                        this.receiveOverHorizon(receiver, this.toForm.chainId, sender, sendId, sended);
+                    }
+                },
+            ).appendTo(this.sendedList, 0);
         }
     }
 
@@ -95,7 +98,7 @@ export default class Swaper extends DomNode {
         }
     }
 
-    public async receiveOverHorizon(_receiver: string, toChain: BigNumberish, sender: string, sendId: BigNumberish, amount: BigNumberish) {
+    public async receiveOverHorizon(_receiver: string, toChain: BigNumberish, sender: string, sendId: BigNumber, amount: BigNumberish) {
         if (this.fromForm.sender !== undefined && this.toForm.sender !== undefined && this.toForm.chainId.toString() === toChain.toString()) {
             const receiver = await this.toForm.sender.loadAddress();
             if (receiver === _receiver) {
