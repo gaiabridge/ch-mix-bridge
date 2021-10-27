@@ -10,15 +10,16 @@ import Swaper from "./component/Swaper";
                     href: "https://dogesound.club/mix",
                     target: "_blank",
                 }),
-                "Bridge"
+                "Bridge",
             ),
-            new Swaper()
         ),
+        el(".warning", "브릿지를 이용하기 위해서는 양쪽 체인에 가스비가 필요합니다."),
+        new Swaper(),
         el("footer",
             el("a", "© Chain Horizon", {
                 href: "https://chainhorizon.org",
                 target: "_blank",
-            })
+            }),
         ),
     );
 })();
