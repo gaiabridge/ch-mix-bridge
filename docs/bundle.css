@@ -197,6 +197,9 @@ body > h1 > .mix > a {
 body > h1 > .mix > a > img {
   margin-right: 4px;
 }
+body > .warning {
+  margin-top: 20px;
+}
 a {
   color: inherit;
   text-decoration: inherit;

@@ -16,6 +16,7 @@ import Swaper from "./component/Swaper";
       ),
       new Swaper()
     ),
+    el(".warning", "브릿지를 이용하기 위해서는 양쪽 체인에 가스비가 필요합니다."),
     el(
       "footer",
       el("a", "© Chain Horizon", {
