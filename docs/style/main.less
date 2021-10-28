@@ -2,38 +2,38 @@
 @import "font.less";
 
 body {
-    font-family     : "IBM Plex Sans", sans-serif;
-    background-color: #000000;
-    color           : #ffffff;
-    padding         : 20px;
-    max-width       : 690px;
-    margin          : auto;
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 20px;
+  max-width: 690px;
+  margin: auto;
 
-    >h1 {
-        >.logo {
-            font-size: 62px;
-        }
-
-        >.mix {
-            margin-top             : 4px;
-            display                : flex;
-            align-items            : center;
-            font-size              : 25px;
-            background             : linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            >a {
-                display     : flex;
-                align-items : center;
-                margin-right: 4px;
-
-                >img {
-                    margin-right: 4px;
-                }
-            }
-        }
+  > h1 {
+    > .logo {
+      text-align: center;
+      font-size: 62px;
+      padding-top: 16px;
     }
+
+    > .mix {
+      text-align: center;
+      width: 100%;
+      margin-top: 4px;
+      font-size: 25px;
+      padding-bottom: 16px;
+      background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      :hover {
+        font-weight: bold;
+      }
+
+      > a {
+        margin-right: 4px;
+      }
+    }
+  }
 
     >.warning {
         margin-top: 20px;
@@ -41,12 +41,24 @@ body {
 }
 
 a {
-    color          : inherit;
-    text-decoration: inherit;
+  color: inherit;
+  text-decoration: inherit;
 }
 
 footer {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 32px;
+  > .social {
+    display: flex;
     margin-top: 20px;
+    justify-content: center;
+
+    > .item {
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+  }
 }
 
 @import "component/swaper.less";
