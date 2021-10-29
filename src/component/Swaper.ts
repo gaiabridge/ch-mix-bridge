@@ -162,8 +162,8 @@ export default class Swaper extends DomNode {
             amount,
             result.text
           );
-        } catch (error) {
-          alert(`Error: ${error}`);
+        } catch (error: any) {
+          alert(`Error: ${error.message}`);
         }
       }
     }
