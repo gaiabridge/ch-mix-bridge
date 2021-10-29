@@ -1,12 +1,12 @@
 .swaper {
-  > .form-container {
+  >.form-container {
     margin-top: 20px;
     .float-wrapper();
 
-    > .arrow {
-      float: left;
-      margin-top: 75px;
-      margin-left: 20px;
+    >.arrow {
+      float       : left;
+      margin-top  : 75px;
+      margin-left : 20px;
       margin-right: 20px;
 
       @media @phone {
@@ -14,11 +14,11 @@
       }
     }
 
-    > .mobile-arrow {
-      display: none;
-      transform: rotate(90deg);
-      margin: auto;
-      margin-top: 20px;
+    >.mobile-arrow {
+      display      : none;
+      transform    : rotate(90deg);
+      margin       : auto;
+      margin-top   : 20px;
       margin-bottom: 20px;
 
       @media @phone {
@@ -26,66 +26,75 @@
       }
     }
 
-    > .form {
-      display: flex;
-      flex-direction: column;
-      float: left;
-      width: 280px;
-      min-height: 240px;
+    >.form {
+      display         : flex;
+      flex-direction  : column;
+      float           : left;
+      width           : 280px;
+      min-height      : 240px;
       background-color: #1f1f1f;
-      color: rgba(255, 255, 255, 0.87);;
+      color           : rgba(255, 255, 255, 0.87);
+      ;
       border-radius: 8px;
-      padding: 8px;
-      font-size: 16px;
+      padding      : 8px;
+      font-size    : 16px;
 
-      > select {
-        font-size: 14px;
-        height: 32px;
-        margin-top: 8px;
-        margin-bottom: 16px;
-        padding: 4px;
+      >select {
+        font-size       : 14px;
+        height          : 32px;
+        margin-top      : 8px;
+        margin-bottom   : 16px;
+        padding         : 4px;
         background-color: #000;
-        color: rgba(255, 255, 255, 0.87);;
+        color           : rgba(255, 255, 255, 0.87);
+        ;
         border-radius: 8px;
-        border: none;
+        border       : none;
       }
 
-      > .balance {
-        font-size: 14px;
+      >.balance {
+        font-size : 14px;
         text-align: right;
       }
 
-      > .input-container {
-        margin-top: 16px;
+      >.input-container {
+        margin-top   : 16px;
         margin-bottom: 16px;
-        flex-grow: 1;
+        flex-grow    : 1;
 
-        > input {
-          padding: 4px;
-          width: 100%;
-          height: 48px;
-          font-size: 14px;
+        >input {
+          padding         : 4px;
+          width           : 100%;
+          height          : 48px;
+          font-size       : 14px;
           background-color: #313131;
-          color: rgba(255, 255, 255, 0.87);;
+          color           : rgba(255, 255, 255, 0.87);
+          ;
           border-radius: 8px;
         }
       }
 
-      > .button-container {
-        > .connect-button,
-        > .send-button {
-          display: flex;
-          justify-content: center;
-          text-align: center;
-          align-items: center;
-          height: 40px;
-          margin: auto;
-          border-radius: 8px;
+      >.button-container {
+        >.add-token-to-wallet-button {
           font-size: 14px;
-          background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
         }
-        > .connect-button,
-        > .send-button:hover {
+
+        >.connect-button,
+        >.send-button {
+          display        : flex;
+          justify-content: center;
+          text-align     : center;
+          align-items    : center;
+          height         : 40px;
+          margin         : auto;
+          margin-top     : 10px;
+          border-radius  : 8px;
+          font-size      : 14px;
+          background     : linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
+        }
+
+        >.connect-button,
+        >.send-button:hover {
           background: linear-gradient(180deg, #f8bd34ee 0%, #e17e1cee 100%);
         }
       }
@@ -97,52 +106,53 @@
     }
   }
 
-  > .history {
-    margin-top: 20px;
+  >.history {
+    margin-top      : 20px;
     background-color: #1f1f1f;
-    color: rgba(255, 255, 255, 0.87);;
-    overflow-y: scroll;
+    color           : rgba(255, 255, 255, 0.87);
+    ;
+    overflow-y     : scroll;
     scrollbar-color: rebeccapurple green;
     scrollbar-width: thin;
-    padding: 10px;
-    height: 160px;
-    border-radius: 8px;
+    padding        : 10px;
+    height         : 160px;
+    border-radius  : 8px;
 
-    > h2 {
-      padding: 8px;
+    >h2 {
+      padding     : 8px;
       padding-left: 0px;
-      font-size: 16px;
-      position: sticky;
+      font-size   : 16px;
+      position    : sticky;
 
-      > .divider {
+      >.divider {
         border: 0.5px solid #e5e5e5;
       }
     }
 
-    > .sended-list {
+    >.sended-list {
       margin-top: 8px;
 
-      > .sended {
+      >.sended {
         padding: 5px 0;
         .float-wrapper();
 
-        > .message {
+        >.message {
           float: left;
         }
 
-        > .done,
-        > .retry-button {
+        >.done,
+        >.retry-button {
           float: right;
         }
 
-        > .retry-button {
-          padding: 8px 12px;
-          border-radius: 8px;
-          font-size: 14px;
-          display: flex;
+        >.retry-button {
+          padding        : 8px 12px;
+          border-radius  : 8px;
+          font-size      : 14px;
+          display        : flex;
           justify-content: center;
-          text-align: center;
-          background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
+          text-align     : center;
+          background     : linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
         }
       }
     }

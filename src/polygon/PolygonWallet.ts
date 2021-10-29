@@ -288,6 +288,34 @@ class PolygonWallet extends EventContainer {
 
         return await this.signTypedData(owner, name, version, verifyingContract, Permit, message);
     }
+
+    public async addToken(
+        address: string,
+        symbol: string,
+        decimals: number,
+        image: string,
+    ) {
+        if (await this.loadChainId() !== 137) {
+            alert("Wrong Network. Please change to Polygon.");
+            this.disconnectFromWalletConnect();
+        } else {
+            let provider;
+            if (this.existsInjectedProvider === true) {
+                provider = this.ethereum;
+            } else {
+                provider = this.walletConnectProvider;
+            }
+            if (provider !== undefined) {
+                provider.request({
+                    method: "wallet_watchAsset",
+                    params: {
+                        type: "ERC20",
+                        options: { address, symbol, decimals, image },
+                    },
+                });
+            }
+        }
+    }
 }
 
 export default new PolygonWallet();

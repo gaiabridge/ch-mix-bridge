@@ -6,6 +6,7 @@ declare class PolygonMixContract extends ERC20Contract<PolygonMix> implements Mi
     constructor();
     loadAddress(): Promise<string | undefined>;
     connect(): Promise<void>;
+    addTokenToWallet(): void;
     sendOverHorizon(toChain: BigNumberish, receiver: string, amount: BigNumberish): Promise<void>;
     sended(sender: string, toChain: BigNumberish, receiver: string, index: BigNumberish): Promise<BigNumber>;
     sendCount(sender: string, toChain: BigNumberish, receiver: string): Promise<BigNumber>;

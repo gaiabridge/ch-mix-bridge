@@ -171,8 +171,8 @@ input {
 }
 body {
   font-family: "IBM Plex Sans", sans-serif;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #121212;
+  color: rgba(255, 255, 255, 0.87);
   padding: 20px;
   max-width: 690px;
   margin: auto;
@@ -199,7 +199,11 @@ body > h1 > .mix > a {
   margin-right: 4px;
 }
 body > .warning {
+  font-size: 16px;
   margin-top: 20px;
+  padding: 16px;
+  background-color: #1f1f1f;
+  border-radius: 8px;
 }
 a {
   color: inherit;
@@ -258,9 +262,9 @@ footer > .social > .item {
   flex-direction: column;
   float: left;
   width: 280px;
-  min-height: 200px;
+  min-height: 240px;
   background-color: #1f1f1f;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.87);
   border-radius: 8px;
   padding: 8px;
   font-size: 16px;
@@ -272,7 +276,7 @@ footer > .social > .item {
   margin-bottom: 16px;
   padding: 4px;
   background-color: #000;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.87);
   border-radius: 8px;
   border: none;
 }
@@ -291,8 +295,11 @@ footer > .social > .item {
   height: 48px;
   font-size: 14px;
   background-color: #313131;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.87);
   border-radius: 8px;
+}
+.swaper > .form-container > .form > .button-container > .add-token-to-wallet-button {
+  font-size: 14px;
 }
 .swaper > .form-container > .form > .button-container > .connect-button,
 .swaper > .form-container > .form > .button-container > .send-button {
@@ -302,6 +309,7 @@ footer > .social > .item {
   align-items: center;
   height: 40px;
   margin: auto;
+  margin-top: 10px;
   border-radius: 8px;
   font-size: 14px;
   background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
@@ -319,7 +327,7 @@ footer > .social > .item {
 .swaper > .history {
   margin-top: 20px;
   background-color: #1f1f1f;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.87);
   overflow-y: scroll;
   scrollbar-color: rebeccapurple green;
   scrollbar-width: thin;

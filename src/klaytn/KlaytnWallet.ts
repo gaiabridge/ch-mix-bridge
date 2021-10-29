@@ -33,6 +33,26 @@ class KlaytnWallet extends EventContainer {
             alert("카이카스가 필요합니다. 카이카스를 설치해주시기 바랍니다.");
         }
     }
+
+    public async loadChainId() {
+        if (Kaikas.installed === true) {
+            return await Kaikas.loadChainId();
+        }
+    }
+
+    public async addToken(
+        address: string,
+        symbol: string,
+        decimals: number,
+        image: string,
+    ) {
+        if (await this.loadChainId() !== 8217) {
+            this.fireEvent("wrongNetwork");
+            console.error("Wrong Network");
+        } else {
+            Kaikas.addToken(address, symbol, decimals, image);
+        }
+    }
 }
 
 export default new KlaytnWallet();

@@ -9,6 +9,7 @@ declare class MixSenderContract extends KlaytnContract implements MixSenderInter
     loadAddress(): Promise<string | undefined>;
     connect(): Promise<void>;
     balanceOf(owner: string): Promise<BigNumber>;
+    addTokenToWallet(): void;
     sendOverHorizon(toChain: BigNumberish, receiver: string, amount: BigNumberish): Promise<void>;
     sended(sender: string, toChain: BigNumberish, receiver: string, index: BigNumberish): Promise<BigNumber>;
     sendCount(sender: string, toChain: BigNumberish, receiver: string): Promise<BigNumber>;

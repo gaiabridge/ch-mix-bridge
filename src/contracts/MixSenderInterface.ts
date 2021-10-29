@@ -8,6 +8,7 @@ export default interface MixSenderInterface {
     loadAddress(): Promise<string | undefined>;
     connect(): Promise<void>;
     balanceOf(owner: string): Promise<BigNumber>;
+    addTokenToWallet(): void;
 
     sendOverHorizon(toChain: BigNumberish, receiver: string, amount: BigNumberish): Promise<void>;
     sended(sender: string, toChain: BigNumberish, receiver: string, index: BigNumberish): Promise<BigNumber>;

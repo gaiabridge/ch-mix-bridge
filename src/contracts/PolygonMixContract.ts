@@ -24,6 +24,10 @@ class PolygonMixContract extends ERC20Contract<PolygonMix> implements MixSenderI
         await PolygonWallet.connect();
     }
 
+    public addTokenToWallet() {
+        PolygonWallet.addToken(this.address, "PMIX", 18, "https://s.klayswap.com/img/token/ic-mix.png");
+    }
+
     public async sendOverHorizon(toChain: BigNumberish, receiver: string, amount: BigNumberish) {
         const contract = await this.connectAndGetWalletContract();
         await contract?.sendOverHorizon(toChain, receiver, amount);

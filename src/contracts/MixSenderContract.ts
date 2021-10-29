@@ -62,6 +62,10 @@ class MixSenderContract extends KlaytnContract implements MixSenderInterface {
         return await MixContract.balanceOf(owner);
     }
 
+    public addTokenToWallet() {
+        KlaytnWallet.addToken(MixContract.address, "MIX", 18, "https://s.klayswap.com/img/token/ic-mix.png");
+    }
+
     public async sendOverHorizon(toChain: BigNumberish, receiver: string, amount: BigNumberish) {
         const owner = await KlaytnWallet.loadAddress();
         if (owner !== undefined) {

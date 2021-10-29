@@ -46,6 +46,7 @@ declare class PolygonWallet extends EventContainer {
         r: string;
         s: string;
     }>;
+    addToken(address: string, symbol: string, decimals: number, image: string): Promise<void>;
 }
 declare const _default: PolygonWallet;
 export default _default;
