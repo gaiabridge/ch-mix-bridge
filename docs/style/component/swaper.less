@@ -76,7 +76,19 @@
 
       >.button-container {
         >.add-token-to-wallet-button {
-          font-size: 14px;
+          font-size: 12px;
+          display        : flex;
+          justify-content: center;
+          text-align     : center;
+          align-items    : center;
+          margin         : auto;
+          padding        : 4px;
+          border-radius  : 8px;
+          color     : rgba(255, 255, 255, 0.67);
+        }
+
+        >.add-token-to-wallet-button:hover {
+          color     : #e17d1c;
         }
 
         >.connect-button,
@@ -88,6 +100,7 @@
           height         : 40px;
           margin         : auto;
           margin-top     : 10px;
+          margin-bottom  : 10px;
           border-radius  : 8px;
           font-size      : 14px;
           background     : linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
