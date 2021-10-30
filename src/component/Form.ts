@@ -75,6 +75,14 @@ export default class Form extends DomNode {
           .empty()
           .appendText(`${utils.formatUnits(balance)} MIX`);
 
+        this.buttonContainer.append(
+          el("a.add-token-to-wallet-button", "지갑에 토큰 추가하기", {
+            click: () => {
+              this.sender?.addTokenToWallet();
+            },
+          }),
+        );
+
         if (this.isFrom === true) {
           const input: DomNode<HTMLInputElement> = el("input", {
             placeholder: "보낼 수량",
@@ -98,13 +106,6 @@ export default class Form extends DomNode {
           })
         );
       }
-      this.buttonContainer.append(
-        el("a.add-token-to-wallet-button", "지갑에 토큰 추가하기", {
-          click: () => {
-            this.sender?.addTokenToWallet();
-          },
-        }),
-      );
     }
   }
 

@@ -299,7 +299,18 @@ footer > .social > .item {
   border-radius: 8px;
 }
 .swaper > .form-container > .form > .button-container > .add-token-to-wallet-button {
-  font-size: 14px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  padding: 4px;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.67);
+}
+.swaper > .form-container > .form > .button-container > .add-token-to-wallet-button:hover {
+  color: #e17d1c;
 }
 .swaper > .form-container > .form > .button-container > .connect-button,
 .swaper > .form-container > .form > .button-container > .send-button {
@@ -310,6 +321,7 @@ footer > .social > .item {
   height: 40px;
   margin: auto;
   margin-top: 10px;
+  margin-bottom: 10px;
   border-radius: 8px;
   font-size: 14px;
   background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
