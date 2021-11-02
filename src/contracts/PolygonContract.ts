@@ -3,7 +3,7 @@ import EventContainer from "eventcontainer";
 import PolygonNetworkProvider from "../polygon/PolygonNetworkProvider";
 import PolygonWallet from "../polygon/PolygonWallet";
 
-export default abstract class Contract<CT extends ethers.Contract> extends EventContainer {
+export default abstract class PolygonContract<CT extends ethers.Contract> extends EventContainer {
 
     protected walletContract: CT | undefined;
     protected contract: CT;

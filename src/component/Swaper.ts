@@ -20,7 +20,7 @@ export default class Swaper extends DomNode {
         (this.fromForm = new Form(this, 8217, true)),
         el("img.arrow", { src: "/images/arrow.png", height: "50" }),
         el("img.mobile-arrow", { src: "/images/arrow.png", height: "50" }),
-        (this.toForm = new Form(this, 137))
+        (this.toForm = new Form(this, 1))
       ),
       el(
         ".history",

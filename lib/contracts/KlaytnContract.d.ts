@@ -1,6 +1,6 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import EventContainer from "eventcontainer";
-export default abstract class Contract extends EventContainer {
+export default abstract class KlaytnContract extends EventContainer {
     address: string;
     private abi;
     private walletContract;

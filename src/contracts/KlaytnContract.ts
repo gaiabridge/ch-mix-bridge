@@ -4,7 +4,7 @@ import ExtWallet from "../klaytn/Kaikas";
 import Klaytn from "../klaytn/Klaytn";
 import KlaytnWallet from "../klaytn/KlaytnWallet";
 
-export default abstract class Contract extends EventContainer {
+export default abstract class KlaytnContract extends EventContainer {
 
     private walletContract: any | undefined;
     protected contract: any;

@@ -6,6 +6,7 @@ export default class Form extends DomNode {
     chainId: number;
     private isFrom;
     sender: MixSenderInterface | undefined;
+    private chainIcon;
     private chainSelect;
     private balanceDisplay;
     private inputContainer;

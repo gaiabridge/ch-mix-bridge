@@ -1,6 +1,6 @@
 import { ContractInterface, ethers } from "ethers";
 import EventContainer from "eventcontainer";
-export default abstract class Contract<CT extends ethers.Contract> extends EventContainer {
+export default abstract class PolygonContract<CT extends ethers.Contract> extends EventContainer {
     address: string;
     private abi;
     protected walletContract: CT | undefined;

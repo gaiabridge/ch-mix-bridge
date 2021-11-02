@@ -269,7 +269,20 @@ footer > .social > .item {
   padding: 8px;
   font-size: 16px;
 }
-.swaper > .form-container > .form > select {
+.swaper > .form-container > .form > .chain {
+  display: flex;
+}
+.swaper > .form-container > .form > .chain > .icon {
+  height: 32px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  margin-right: 10px;
+}
+.swaper > .form-container > .form > .chain > .icon > img {
+  display: block;
+}
+.swaper > .form-container > .form > .chain > select {
+  flex-grow: 1;
   font-size: 14px;
   height: 32px;
   margin-top: 8px;

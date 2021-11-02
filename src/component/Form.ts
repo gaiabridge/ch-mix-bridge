@@ -1,5 +1,6 @@
 import { DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
+import EthereumMixContract from "../contracts/EthereumMixContract";
 import MixSenderContract from "../contracts/MixSenderContract";
 import MixSenderInterface from "../contracts/MixSenderInterface";
 import PolygonMixContract from "../contracts/PolygonMixContract";
@@ -8,6 +9,7 @@ import Swaper from "./Swaper";
 export default class Form extends DomNode {
   public sender: MixSenderInterface | undefined;
 
+  private chainIcon: DomNode<HTMLImageElement>;
   private chainSelect: DomNode<HTMLSelectElement>;
   private balanceDisplay: DomNode;
   private inputContainer: DomNode;
@@ -20,22 +22,30 @@ export default class Form extends DomNode {
   ) {
     super(".form");
     this.append(
-      (this.chainSelect = el(
-        "select",
-        el("option", "Klaytn", {
-          value: "8217",
-        }),
-        el("option", "Polygon", {
-          value: "137",
-        }),
-        {
-          change: () => {
-            const originChainId = this.chainId;
-            this.changeChain(parseInt(this.chainSelect.domElement.value, 10));
-            this.fireEvent("changeChain", this.chainId, originChainId);
-          },
-        }
-      )),
+      el(".chain",
+        el(".icon",
+          this.chainIcon = el("img", { height: "32" }),
+        ),
+        this.chainSelect = el(
+          "select",
+          el("option", "Klaytn", {
+            value: "8217",
+          }),
+          el("option", "Ethereum", {
+            value: "1",
+          }),
+          el("option", "Polygon", {
+            value: "137",
+          }),
+          {
+            change: () => {
+              const originChainId = this.chainId;
+              this.changeChain(parseInt(this.chainSelect.domElement.value, 10));
+              this.fireEvent("changeChain", this.chainId, originChainId);
+            },
+          }
+        ) as any,
+      ),
       (this.balanceDisplay = el(".balance")),
       (this.inputContainer = el(".input-container")),
       (this.buttonContainer = el(".button-container"))
@@ -53,8 +63,13 @@ export default class Form extends DomNode {
 
     if (chainId === 8217) {
       this.sender = MixSenderContract;
+      this.chainIcon.domElement.src = "/images/klaytn-logo.png";
+    } else if (chainId === 1) {
+      this.sender = EthereumMixContract;
+      this.chainIcon.domElement.src = "/images/ethereum-logo.png";
     } else if (chainId === 137) {
       this.sender = PolygonMixContract;
+      this.chainIcon.domElement.src = "/images/polygon-logo.png";
     }
     await this.loadBalance();
 
