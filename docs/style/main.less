@@ -1,13 +1,15 @@
 @import "base.less";
 @import "font.less";
+@import "palette.less";
 
 body {
   font-family     : "IBM Plex Sans", sans-serif;
-  background-color: #121212;
-  color           : rgba(255, 255, 255, 0.87);;
-  padding         : 20px;
-  max-width       : 690px;
-  margin          : auto;
+  background-color: @backgroud;
+  color           : @high-emphasis;
+  ;
+  padding  : 20px;
+  max-width: 690px;
+  margin   : auto;
 
   >h1 {
     >.logo {
@@ -22,7 +24,7 @@ body {
       margin-top             : 4px;
       font-size              : 25px;
       padding-bottom         : 16px;
-      background             : linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
+      background             : @brand-primary;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
 
@@ -37,11 +39,11 @@ body {
   }
 
   >.warning {
-    font-size: 16px;
-    margin-top: 20px;
-    padding: 16px;
-    background-color: #1f1f1f;
-    border-radius: 8px;
+    font-size       : @body2;
+    margin-top      : 20px;
+    padding         : 16px;
+    background-color: @shadow;
+    border-radius   : 8px;
   }
 }
 

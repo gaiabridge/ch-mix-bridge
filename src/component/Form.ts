@@ -24,7 +24,7 @@ export default class Form extends DomNode {
     this.append(
       el(".chain",
         el(".icon",
-          this.chainIcon = el("img", { height: "32" }),
+          this.chainIcon = el("img", { height: "24" }),
         ),
         this.chainSelect = el(
           "select",
@@ -45,6 +45,7 @@ export default class Form extends DomNode {
             },
           }
         ) as any,
+        isFrom ? el("span.help-text", "에서") : el("span.help-text", "으로")
       ),
       (this.balanceDisplay = el(".balance")),
       (this.inputContainer = el(".input-container")),
