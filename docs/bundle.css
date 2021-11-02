@@ -199,7 +199,7 @@ body > h1 > .mix > a {
   margin-right: 4px;
 }
 body > .warning {
-  font-size: 16px;
+  font-size: 0.875rem;
   margin-top: 20px;
   padding: 16px;
   background-color: #1f1f1f;
@@ -271,27 +271,28 @@ footer > .social > .item {
 }
 .swaper > .form-container > .form > .chain {
   display: flex;
-}
-.swaper > .form-container > .form > .chain > .icon {
-  height: 32px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
 }
 .swaper > .form-container > .form > .chain > .icon > img {
   display: block;
+  margin-right: 8px;
 }
 .swaper > .form-container > .form > .chain > select {
   flex-grow: 1;
   font-size: 14px;
   height: 32px;
   margin-top: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   padding: 4px;
-  background-color: #000;
+  background-color: black;
   color: rgba(255, 255, 255, 0.87);
   border-radius: 8px;
   border: none;
+}
+.swaper > .form-container > .form > .chain > .help-text {
+  font-size: 16px;
+  margin-left: 8px;
 }
 .swaper > .form-container > .form > .balance {
   font-size: 14px;
@@ -341,7 +342,7 @@ footer > .social > .item {
 }
 .swaper > .form-container > .form > .button-container > .connect-button,
 .swaper > .form-container > .form > .button-container > .send-button:hover {
-  background: linear-gradient(180deg, #f8bd34ee 0%, #e17e1cee 100%);
+  background: linear-gradient(180deg, #f8bc34 0%, #e17d1c 100%);
 }
 @media only screen and (max-width: 719px) {
   .swaper > .form-container > .form {
