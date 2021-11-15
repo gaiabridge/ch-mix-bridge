@@ -14,6 +14,7 @@ import Swaper from "./component/Swaper";
             ),
         ),
         el(".warning", "🚨 브릿지를 이용하기 위해서는 양쪽 체인에 가스비가 필요합니다."),
+        el(".warning", "🚨 한번 전송이 시작되면 돌이킬 수 없습니다. 취소가 불가능합니다."),
         new Swaper(),
         el("footer",
             el("a", "© Chain Horizon", {

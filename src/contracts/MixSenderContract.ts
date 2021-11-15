@@ -1,4 +1,5 @@
 import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
+import { constants } from "ethers";
 import Klaytn from "../klaytn/Klaytn";
 import KlaytnWallet from "../klaytn/KlaytnWallet";
 import MixSenderArtifact from "./abi/pmix/artifacts/contracts/MixSender.sol/MixSender.json";
@@ -70,7 +71,7 @@ class MixSenderContract extends KlaytnContract implements MixSenderInterface {
         const owner = await KlaytnWallet.loadAddress();
         if (owner !== undefined) {
             if ((await MixContract.allowance(owner, this.address)).lt(amount)) {
-                await MixContract.approve(this.address, amount);
+                await MixContract.approve(this.address, constants.MaxUint256);
                 await new Promise<void>((resolve) => {
                     setTimeout(async () => {
                         await this.runWalletMethod("sendOverHorizon", toChain, receiver, amount);
