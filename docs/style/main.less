@@ -3,69 +3,70 @@
 @import "palette.less";
 
 body {
-  font-family     : "IBM Plex Sans", sans-serif;
-  background-color: @backgroud;
-  color           : @high-emphasis;
-  padding         : 20px;
-  max-width       : 690px;
-  margin          : auto;
+    font-family     : "IBM Plex Sans", sans-serif;
+    background-color: @backgroud;
+    color           : @high-emphasis;
+    padding         : 20px;
+    max-width       : 690px;
+    margin          : auto;
 
-  >h1 {
-    >.logo {
-      text-align : center;
-      font-size  : 62px;
-      padding-top: 16px;
+    >h1 {
+        >.logo {
+            text-align : center;
+            font-size  : 62px;
+            padding-top: 16px;
+        }
+
+        >.mix {
+            text-align             : center;
+            width                  : 100%;
+            margin-top             : 4px;
+            font-size              : 25px;
+            padding-bottom         : 16px;
+            background             : @brand-primary;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            :hover {
+                font-weight: bold;
+            }
+
+            >a {
+                margin-right: 4px;
+            }
+        }
     }
 
-    >.mix {
-      text-align             : center;
-      width                  : 100%;
-      margin-top             : 4px;
-      font-size              : 25px;
-      padding-bottom         : 16px;
-      background             : @brand-primary;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-
-      :hover {
-        font-weight: bold;
-      }
-
-      >a {
-        margin-right: 4px;
-      }
+    >.warning {
+        font-size       : @body2;
+        margin-top      : 20px;
+        padding         : 8px 16px;
+        background-color: @shadow;
+        border-radius   : 8px;
+        line-height     : 2em;
     }
-  }
-
-  >.warning {
-    font-size       : @body2;
-    margin-top      : 20px;
-    padding         : 16px;
-    background-color: @shadow;
-    border-radius   : 8px;
-  }
 }
 
 a {
-  color          : inherit;
-  text-decoration: inherit;
+    color          : inherit;
+    text-decoration: inherit;
 }
 
 footer {
-  font-size : 16px;
-  text-align: center;
-  margin-top: 32px;
+    font-size : 16px;
+    text-align: center;
+    margin-top: 32px;
 
-  >.social {
-    display        : flex;
-    margin-top     : 20px;
-    justify-content: center;
+    >.social {
+        display        : flex;
+        margin-top     : 20px;
+        justify-content: center;
 
-    >.item {
-      margin-left : 16px;
-      margin-right: 16px;
+        >.item {
+            margin-left : 16px;
+            margin-right: 16px;
+        }
     }
-  }
 }
 
 @import "component/swaper.less";

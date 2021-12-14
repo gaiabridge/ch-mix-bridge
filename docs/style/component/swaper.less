@@ -2,191 +2,191 @@
 @import "../palette.less";
 
 .swaper {
-  >.form-container {
-    margin-top: 20px;
-    .float-wrapper();
-
-    >.arrow {
-      float       : left;
-      margin-top  : 75px;
-      margin-left : 20px;
-      margin-right: 20px;
-
-      @media @phone {
-        display: none;
-      }
-    }
-
-    >.mobile-arrow {
-      display      : none;
-      transform    : rotate(90deg);
-      margin       : auto;
-      margin-top   : 20px;
-      margin-bottom: 20px;
-
-      @media @phone {
-        display: block;
-      }
-    }
-
-    >.form {
-      display         : flex;
-      flex-direction  : column;
-      float           : left;
-      width           : 280px;
-      min-height      : 240px;
-      background-color: @shadow;
-      color           : @high-emphasis;
-      border-radius   : 8px;
-      padding         : 8px;
-      font-size       : 16px;
-
-      >.chain {
-        display        : flex;
-        justify-content: center;
-        align-items    : center;
-
-        >.icon {
-          >img {
-            display     : block;
-            margin-right: 8px;
-          }
-        }
-
-        >select {
-          flex-grow       : 1;
-          font-size       : 14px;
-          height          : 32px;
-          margin-top      : 8px;
-          margin-bottom   : 8px;
-          padding         : 4px;
-          background-color: black;
-          color           : @high-emphasis;
-          border-radius   : 8px;
-          border          : none;
-        }
-
-        >.help-text {
-          font-size  : 16px;
-          margin-left: 8px;
-        }
-      }
-
-      >.balance {
-        font-size : 14px;
-        text-align: right;
-      }
-
-      >.input-container {
-        margin-top   : 16px;
-        margin-bottom: 16px;
-        flex-grow    : 1;
-
-        >input {
-          padding         : 4px;
-          width           : 100%;
-          height          : 48px;
-          font-size       : 14px;
-          background-color: @input;
-          color           : @high-emphasis;
-          ;
-          border-radius: 8px;
-        }
-      }
-
-      >.button-container {
-        >.add-token-to-wallet-button {
-          font-size      : 12px;
-          display        : flex;
-          justify-content: center;
-          text-align     : center;
-          align-items    : center;
-          margin         : auto;
-          padding        : 4px;
-          border-radius  : 8px;
-          color          : @medium-emphasis;
-        }
-
-        >.add-token-to-wallet-button:hover {
-          color: @brand-primary-hover;
-        }
-
-        >.connect-button,
-        >.send-button {
-          display        : flex;
-          justify-content: center;
-          text-align     : center;
-          align-items    : center;
-          height         : 40px;
-          margin         : auto;
-          margin-top     : 10px;
-          margin-bottom  : 10px;
-          border-radius  : 8px;
-          font-size      : 14px;
-          background     : @brand-primary;
-        }
-
-        >.connect-button,
-        >.send-button:hover {
-          background: @brand-primary;
-        }
-      }
-
-      @media @phone {
-        float: none;
-        width: auto;
-      }
-    }
-  }
-
-  >.history {
-    margin-top      : 20px;
-    background-color: @shadow;
-    color           : @high-emphasis ;
-    overflow-y      : scroll;
-    scrollbar-color : rebeccapurple green;
-    scrollbar-width : thin;
-    padding         : 10px;
-    height          : 160px;
-    border-radius   : 8px;
-
-    >h2 {
-      padding     : 8px;
-      padding-left: 0px;
-      font-size   : 16px;
-      position    : sticky;
-
-      >.divider {
-        border: 0.5px solid #e5e5e5;
-      }
-    }
-
-    >.sended-list {
-      margin-top: 8px;
-
-      >.sended {
-        padding: 5px 0;
+    >.form-container {
+        margin-top: 20px;
         .float-wrapper();
 
-        >.message {
-          float: left;
+        >.arrow {
+            float       : left;
+            margin-top  : 75px;
+            margin-left : 20px;
+            margin-right: 20px;
+
+            @media @phone {
+                display: none;
+            }
         }
 
-        >.done,
-        >.retry-button {
-          float: right;
+        >.mobile-arrow {
+            display      : none;
+            transform    : rotate(90deg);
+            margin       : auto;
+            margin-top   : 20px;
+            margin-bottom: 20px;
+
+            @media @phone {
+                display: block;
+            }
         }
 
-        >.retry-button {
-          padding        : 8px 12px;
-          border-radius  : 8px;
-          font-size      : 14px;
-          display        : flex;
-          justify-content: center;
-          text-align     : center;
-          background     : @brand-primary;
+        >.form {
+            display         : flex;
+            flex-direction  : column;
+            float           : left;
+            width           : 280px;
+            min-height      : 240px;
+            background-color: @shadow;
+            color           : @high-emphasis;
+            border-radius   : 8px;
+            padding         : 8px;
+            font-size       : 16px;
+
+            >.chain {
+                display        : flex;
+                justify-content: center;
+                align-items    : center;
+
+                >.icon {
+                    >img {
+                        display     : block;
+                        margin-right: 8px;
+                    }
+                }
+
+                >select {
+                    flex-grow       : 1;
+                    font-size       : 14px;
+                    height          : 32px;
+                    margin-top      : 8px;
+                    margin-bottom   : 8px;
+                    padding         : 4px;
+                    background-color: black;
+                    color           : @high-emphasis;
+                    border-radius   : 8px;
+                    border          : none;
+                }
+
+                >.help-text {
+                    font-size  : 16px;
+                    margin-left: 8px;
+                }
+            }
+
+            >.balance {
+                font-size : 14px;
+                text-align: right;
+            }
+
+            >.input-container {
+                margin-top   : 16px;
+                margin-bottom: 16px;
+                flex-grow    : 1;
+
+                >input {
+                    padding         : 4px;
+                    width           : 100%;
+                    height          : 48px;
+                    font-size       : 14px;
+                    background-color: @input;
+                    color           : @high-emphasis;
+                    ;
+                    border-radius: 8px;
+                }
+            }
+
+            >.button-container {
+                >.add-token-to-wallet-button {
+                    font-size      : 12px;
+                    display        : flex;
+                    justify-content: center;
+                    text-align     : center;
+                    align-items    : center;
+                    margin         : auto;
+                    padding        : 4px;
+                    border-radius  : 8px;
+                    color          : @medium-emphasis;
+                }
+
+                >.add-token-to-wallet-button:hover {
+                    color: @brand-primary-hover;
+                }
+
+                >.connect-button,
+                >.send-button {
+                    display        : flex;
+                    justify-content: center;
+                    text-align     : center;
+                    align-items    : center;
+                    height         : 40px;
+                    margin         : auto;
+                    margin-top     : 10px;
+                    margin-bottom  : 10px;
+                    border-radius  : 8px;
+                    font-size      : 14px;
+                    background     : @brand-primary;
+                }
+
+                >.connect-button,
+                >.send-button:hover {
+                    background: @brand-primary;
+                }
+            }
+
+            @media @phone {
+                float: none;
+                width: auto;
+            }
         }
-      }
     }
-  }
+
+    >.history {
+        margin-top      : 20px;
+        background-color: @shadow;
+        color           : @high-emphasis ;
+        overflow-y      : scroll;
+        scrollbar-color : rebeccapurple green;
+        scrollbar-width : thin;
+        padding         : 10px;
+        height          : 160px;
+        border-radius   : 8px;
+
+        >h2 {
+            padding     : 8px;
+            padding-left: 0px;
+            font-size   : 16px;
+            position    : sticky;
+
+            >.divider {
+                border: 0.5px solid #e5e5e5;
+            }
+        }
+
+        >.sended-list {
+            margin-top: 8px;
+
+            >.sended {
+                padding: 5px 0;
+                .float-wrapper();
+
+                >.message {
+                    float: left;
+                }
+
+                >.done,
+                >.retry-button {
+                    float: right;
+                }
+
+                >.retry-button {
+                    padding        : 8px 12px;
+                    border-radius  : 8px;
+                    font-size      : 14px;
+                    display        : flex;
+                    justify-content: center;
+                    text-align     : center;
+                    background     : @brand-primary;
+                }
+            }
+        }
+    }
 }

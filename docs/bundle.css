@@ -201,9 +201,10 @@ body > h1 > .mix > a {
 body > .warning {
   font-size: 0.875rem;
   margin-top: 20px;
-  padding: 16px;
+  padding: 8px 16px;
   background-color: #1f1f1f;
   border-radius: 8px;
+  line-height: 2em;
 }
 a {
   color: inherit;
