@@ -28,11 +28,18 @@ export default class Sended extends DomNode {
         const received = await this.toSender.received(this.receiver, this.fromChain, this.sender, this.sendId);
 
         this.empty().append(
-            el(".message", `${utils.formatEther(sended)} MIX`,),
+            el(".message", `${await this.getFormatting(sended)} MIX`,),
             received === true ? el(".done", "전송 완료") : el("a.retry-button", "재시도", {
                 click: () => this.retry(),
             }),
         );
+    }
+
+    private async getFormatting(balance: BigNumber) {
+        console.log(balance)
+        let balanceDisplay = utils.formatEther(balance!)
+        balanceDisplay = (+balanceDisplay).toFixed(4);
+        return balanceDisplay;
     }
 
     private receiveOverHorizonHandler = async (receiver: string, fromChain: BigNumber, sender: string, sendId: BigNumber) => {

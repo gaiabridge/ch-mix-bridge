@@ -1,3 +1,5 @@
+import { BigNumber } from "@ethersproject/bignumber";
+
 class Klaytn {
 
     private caver = (window as any).caver !== undefined ? undefined :
@@ -13,6 +15,10 @@ class Klaytn {
         return this.caver === undefined ?
             await (window as any).caver.klay.getBlockNumber() :
             await this.caver.klay.getBlockNumber();
+    }
+
+    public async balanceOf(address: string) {
+        return BigNumber.from(await this.caver.klay.getBalance(address));
     }
 }
 

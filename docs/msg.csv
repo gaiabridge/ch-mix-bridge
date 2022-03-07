@@ -1,0 +1,9 @@
+key,ko,en
+TITLE,MIX Gaia Bridge,MIX Gaia Bridge
+CONNECT_WALLET_BUTTON,CONNECT WALLET,CONNECT WALLET
+FAIL_BALANCE_DESC,잔액 불러오기 실패
+FEE_TITLE,수수료,Fees
+RECEIVED_TITLE,받는 수량,Estimated Received
+WARNING_TITLE,브릿지를 이용하려면 두 체인의 가스비가 필요합니다.,Gas costs are required for both chains to use the bridge.
+APPROVE_BUTTON,Approve
+TRANSFER_BUTTON,Transfer

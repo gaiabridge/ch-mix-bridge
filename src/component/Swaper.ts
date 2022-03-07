@@ -1,5 +1,6 @@
 import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { DomNode, el } from "@hanul/skynode";
+import msg from "msg.js";
 import SkyUtil from "skyutil";
 import superagent from "superagent";
 import Form from "./Form";
@@ -18,13 +19,34 @@ export default class Swaper extends DomNode {
             el(
                 ".form-container",
                 (this.fromForm = new Form(this, 8217, true)),
-                el("img.arrow", { src: "/images/arrow.png", height: "50" }),
-                el("img.mobile-arrow", { src: "/images/arrow.png", height: "50" }),
+                el("img.arrow", { src: "/images/shared/icn/icn-arrow-right.svg", height: "50", alt: "icn-arrow-right" }),
                 (this.toForm = new Form(this, 1))
             ),
-            el(
-                ".history",
+            el(".fee-container",
+                el(".content",
+                    el("h3", msg("FEE_TITLE")),
+                    // el("span", "0.3% (Charged by Gaia Protocol)"),
+                ),
+                el("p", "0 MIX"),
+            ),
+            el(".received-container",
+                el("h3", msg("RECEIVED_TITLE")),
+                el("p", "0 MIX"),
+            ),
+            el(".warning",
+                el("img", { src: "/images/shared/icn/icn-warning.svg", alt: "warning icon" }),
+                el("p", msg("WARNING_TITLE")),
+            ),
+            el(".button-container",
+                el("button", msg("APPROVE_BUTTON"), { click: () => { } }),
+                el("button", msg("TRANSFER_BUTTON")),
+            ),
+            el(".history",
                 el("h2", "전송 기록"),
+                el(".sended-title",
+                    el("h3", "보낸 체인"),
+                    el("h3", "상태"),
+                ),
                 el("hr.divider"),
                 (this.sendedList = el(".sended-list"))
             )

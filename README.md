@@ -1,1 +1,1 @@
-# ch-mix-bridge
+# gaia-mix-bridge
