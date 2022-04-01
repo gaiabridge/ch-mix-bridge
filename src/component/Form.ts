@@ -1,5 +1,6 @@
 import { DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
+import msg from "msg.js";
 import EthereumMixContract from "../contracts/EthereumMixContract";
 import MixSenderContract from "../contracts/MixSenderContract";
 import MixSenderInterface from "../contracts/MixSenderInterface";
@@ -23,9 +24,8 @@ export default class Form extends DomNode {
         super(".form");
         this.append(
             el(".chain",
-                el(".icon",
-                    this.chainIcon = el("img", { height: "24" }),
-                ),
+                this.chainIcon = el("img", { alt: "chain logo" }),
+                isFrom ? el("p", "FROM") : el("p.help-text", "TO"),
                 this.chainSelect = el(
                     "select",
                     el("option", "Klaytn", {
@@ -45,7 +45,6 @@ export default class Form extends DomNode {
                         },
                     }
                 ) as any,
-                isFrom ? el("span.help-text", "에서") : el("span.help-text", "으로")
             ),
             (this.balanceDisplay = el(".balance")),
             (this.inputContainer = el(".input-container")),
@@ -64,13 +63,13 @@ export default class Form extends DomNode {
 
         if (chainId === 8217) {
             this.sender = MixSenderContract;
-            this.chainIcon.domElement.src = "/images/klaytn-logo.png";
+            this.chainIcon.domElement.src = "/images/shared/icn/icn-klaytn.svg";
         } else if (chainId === 1) {
             this.sender = EthereumMixContract;
-            this.chainIcon.domElement.src = "/images/ethereum-logo.png";
+            this.chainIcon.domElement.src = "/images/shared/icn/icn-ethereum.svg";
         } else if (chainId === 137) {
             this.sender = PolygonMixContract;
-            this.chainIcon.domElement.src = "/images/polygon-logo.png";
+            this.chainIcon.domElement.src = "/images/shared/icn/icn-polygon.svg";
         }
         await this.loadBalance();
 
@@ -89,15 +88,7 @@ export default class Form extends DomNode {
                 const balance = await this.sender.balanceOf(owner);
                 this.balanceDisplay
                     .empty()
-                    .appendText(`${utils.formatUnits(balance)} MIX`);
-
-                this.buttonContainer.append(
-                    el("a.add-token-to-wallet-button", "지갑에 토큰 추가하기", {
-                        click: () => {
-                            this.sender?.addTokenToWallet();
-                        },
-                    }),
-                );
+                    .appendText(`${await this.getFormatting(balance)} MIX`);
 
                 if (this.isFrom === true) {
                     const input: DomNode<HTMLInputElement> = el("input", {
@@ -115,9 +106,9 @@ export default class Form extends DomNode {
                     );
                 }
             } else {
-                this.balanceDisplay.empty().appendText("잔액 불러오기 실패");
+                this.balanceDisplay.empty().appendText(msg("FAIL_BALANCE_DESC"));
                 this.buttonContainer.append(
-                    el("a.connect-button", "지갑 연결", {
+                    el("a.connect-button", msg("CONNECT_WALLET_BUTTON"), {
                         click: () => this.sender?.connect(),
                     })
                 );
@@ -150,6 +141,13 @@ export default class Form extends DomNode {
             this.swaper.addSended(sender, receiver, sendId);
         }
     };
+
+    private async getFormatting(balance: BigNumber) {
+        console.log(balance)
+        let balanceDisplay = utils.formatEther(balance!)
+        balanceDisplay = (+balanceDisplay).toFixed(4);
+        return balanceDisplay;
+    }
 
     public delete() {
         this.sender?.off("connect", this.connectHandler);
