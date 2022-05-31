@@ -169,7 +169,7 @@ export default class Swaper extends DomNode {
                 try {
                     const result = await superagent
                         .get(
-                            `https://api.chainhorizon.org/mix/signsend?receiver=${receiver}&fromChain=${this.fromForm.chainId
+                            `https://gaiabridge.com/mix/signsend?receiver=${receiver}&fromChain=${this.fromForm.chainId
                             }&toChain=${this.toForm.chainId
                             }&sender=${sender}&sendId=${sendId}&amount=${amount.toString()}`
                         )
